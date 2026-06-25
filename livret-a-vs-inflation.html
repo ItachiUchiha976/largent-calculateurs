@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Livret A vs Inflation — Calculateur de rendement réel | L'Argent Expliqué</title>
+  <meta name="description" content="Votre Livret A vous protège-t-il vraiment contre l'inflation ? Calculez votre rendement réel et comparez la valeur nominale et la valeur réelle de votre épargne." />
+  <meta property="og:title" content="Livret A vs Inflation — Rendement réel | L'Argent Expliqué" />
+  <meta property="og:description" content="Comparez le Livret A et l'inflation sur le long terme. Calculez votre rendement réel net instantanément." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://tonargentexplique.fr/calculateurs/livret-a-vs-inflation.html" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Le Livret A protège-t-il contre l'inflation ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Le Livret A protège partiellement si son taux est supérieur ou égal à l'inflation. Quand l'inflation dépasse le taux du Livret A, le rendement réel est négatif : votre épargne perd du pouvoir d'achat même si le solde nominal augmente."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment calculer le rendement réel du Livret A ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Le rendement réel approximatif se calcule ainsi : (1 + taux Livret A) / (1 + taux inflation) − 1. Si ce résultat est négatif, votre épargne perd du pouvoir d'achat."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="L'Argent Expliqué — Accueil calculateurs">
+        <span class="brand-name">💶 L'Argent Expliqué</span>
+        <span class="brand-sub">Calculateurs gratuits</span>
+      </a>
+      <a href="https://www.youtube.com/@tonargentexplique" class="header-cta" target="_blank" rel="noopener">
+        📺 La chaîne
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="container">
+
+      <nav class="breadcrumb" aria-label="Navigation">
+        <a href="index.html">Calculateurs</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Livret A vs Inflation</span>
+      </nav>
+
+      <!-- Calculator card -->
+      <div class="calc-card mt-sm">
+        <h1 class="calc-title">🔍 Livret A vs Inflation</h1>
+        <p class="calc-intro">
+          Le taux du Livret A (1,5 % depuis le 1<sup>er</sup> février 2026) est-il suffisant pour protéger votre pouvoir d'achat ?
+          Comparez la <strong style="color:var(--text)">valeur nominale</strong> (ce que vaut votre Livret A sur le papier) et la
+          <strong style="color:var(--text)">valeur réelle</strong> (ce que cela vous permet d'acheter vraiment).
+          <em style="color:var(--text-muted); font-style:normal;"> Les taux sont modifiables — taux indicatifs, non garantis.</em>
+        </p>
+
+        <form id="calcForm" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="montant">Montant placé sur le Livret A<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="montant" value="10000" min="1" max="10000000" step="500" inputmode="decimal" aria-describedby="montantErr" />
+                <span class="input-unit">€</span>
+              </div>
+              <span class="input-error" id="montantErr" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="duree">Durée<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="duree" value="10" min="1" max="50" step="1" inputmode="decimal" aria-describedby="dureeErr" />
+                <span class="input-unit">ans</span>
+              </div>
+              <span class="input-error" id="dureeErr" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tauxLivret">Taux Livret A annuel
+                <span style="color:var(--text-muted); font-weight:400; font-size:0.78rem;">(officiel depuis 01/02/2026)</span>
+              </label>
+              <div class="input-wrap">
+                <input type="number" id="tauxLivret" value="1.5" min="0.1" max="20" step="0.1" inputmode="decimal" aria-describedby="livretErr" />
+                <span class="input-unit">%</span>
+              </div>
+              <span class="input-error" id="livretErr" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="tauxInflation">Taux d'inflation annuel
+                <span style="color:var(--text-muted); font-weight:400; font-size:0.78rem;">(hypothèse pédagogique)</span>
+              </label>
+              <div class="input-wrap">
+                <input type="number" id="tauxInflation" value="2" min="0.1" max="50" step="0.1" inputmode="decimal" aria-describedby="inflationErr" />
+                <span class="input-unit">%</span>
+              </div>
+              <span class="input-error" id="inflationErr" role="alert"></span>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- Result -->
+        <div class="result-card" id="resultCard" aria-live="polite">
+          <div class="result-label">Rendement réel annuel net</div>
+          <div class="result-main" id="resReel">—</div>
+          <div class="result-sub" id="resSub"></div>
+          <div class="result-grid" style="margin-top:16px;">
+            <div class="result-item accent">
+              <div class="ri-label">Valeur nominale (Livret A)</div>
+              <div class="ri-value" id="resNominal">—</div>
+            </div>
+            <div class="result-item">
+              <div class="ri-label">Valeur réelle (pouvoir d'achat)</div>
+              <div class="ri-value" id="resRealVal">—</div>
+            </div>
+            <div class="result-item">
+              <div class="ri-label">Intérêts nominaux perçus</div>
+              <div class="ri-value" id="resInterets">—</div>
+            </div>
+            <div class="result-item danger">
+              <div class="ri-label">Perte / gain réel(le)</div>
+              <div class="ri-value" id="resGain">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alert -->
+        <div class="alert mt-sm" id="alertMsg" role="alert" style="display:none;"></div>
+
+        <!-- Ad slot -->
+        <!-- AD_SLOT: rectangle 300x250 sous les résultats (à activer après trafic Google AdSense) -->
+        <div class="ad-placeholder"></div>
+
+        <!-- Chart -->
+        <div class="chart-wrap mt-md">
+          <div class="chart-title">Valeur nominale vs valeur réelle dans le temps</div>
+          <canvas id="chart" data-height="210" role="img" aria-label="Graphique comparant valeur nominale Livret A et valeur réelle corrigée de l'inflation"></canvas>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--accent)"></div>
+              <span>Valeur nominale (Livret A)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--danger)"></div>
+              <span>Valeur réelle (pouvoir d'achat)</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /calc-card -->
+
+      <!-- How it works -->
+      <div class="how-it-works">
+        <div class="how-title">📐 Comment ça marche</div>
+        <p>
+          La <strong style="color:var(--text)">valeur nominale</strong> du Livret A augmente chaque année grâce aux intérêts.
+          Mais la <strong style="color:var(--text)">valeur réelle</strong> (le pouvoir d'achat effectif) dépend du différentiel entre le taux du Livret A et l'inflation.
+        </p>
+        <div class="formula-block">
+          Valeur nominale  = M × (1 + livretA)^n<br>
+          Valeur réelle    = M × (1 + livretA)^n / (1 + inflation)^n<br>
+          Rendement réel ≈ (1 + livretA) / (1 + inflation) − 1
+        </div>
+        <p>
+          Si l'inflation est à 2 % et le Livret A à 1,5 %, le rendement réel annuel est
+          (1,015/1,02) − 1 ≈ <strong style="color:var(--danger)">−0,49 %</strong> : votre épargne perd légèrement de sa valeur chaque année
+          malgré les intérêts perçus.
+        </p>
+        <p>
+          Cela ne signifie pas qu'il faut vider son Livret A — il reste un outil de liquidité et de sécurité.
+          Mais pour constituer un patrimoine sur le long terme, un rendement réel positif est nécessaire.
+        </p>
+      </div>
+
+      <!-- CTA YouTube -->
+      <div class="mt-md">
+        <a href="https://www.youtube.com/@tonargentexplique" class="yt-cta" target="_blank" rel="noopener">
+          <span class="yt-cta-icon">📺</span>
+          <span>Comprendre ton argent en vidéo →</span>
+          <span class="yt-cta-arrow">›</span>
+        </a>
+      </div>
+
+      <!-- Related -->
+      <div class="related-links mt-md">
+        <div class="related-title">Autres calculateurs</div>
+        <ul class="related-list" aria-label="Liens vers d'autres calculateurs">
+          <li><a href="inflation-pouvoir-achat.html">Inflation — érosion du pouvoir d'achat seul</a></li>
+          <li><a href="interets-composes.html">Intérêts composés — simuler une meilleure épargne</a></li>
+          <li><a href="epargne-mensuelle.html">Épargne mensuelle — quel capital atteindre ?</a></li>
+          <li><a href="regle-72.html">Règle des 72 — combien de temps pour doubler ?</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-yt">
+        <a href="https://www.youtube.com/@tonargentexplique" target="_blank" rel="noopener">
+          📺 L'Argent Expliqué — La chaîne YouTube
+        </a>
+      </div>
+      <p class="footer-disclaimer">
+        <strong>⚠️ Contenu éducatif uniquement.</strong> Ces calculateurs ne constituent pas un conseil financier ou en investissement. Le taux du Livret A (1,5 % au 01/02/2026) est susceptible de changer — vérifiez le taux officiel en vigueur sur le site de la Banque de France. Les rendements utilisés sont illustratifs et ne sont pas garantis. Consultez un professionnel agréé pour toute décision.
+      </p>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="interets-composes.html">Intérêts composés</a>
+        <a href="regle-72.html">Règle des 72</a>
+        <a href="epargne-mensuelle.html">Épargne</a>
+        <a href="inflation-pouvoir-achat.html">Inflation</a>
+      </div>
+      <p class="footer-copy">© 2026 L'Argent Expliqué — Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const elMontant       = document.getElementById("montant");
+      const elDuree         = document.getElementById("duree");
+      const elTauxLivret    = document.getElementById("tauxLivret");
+      const elTauxInflation = document.getElementById("tauxInflation");
+      const elReel          = document.getElementById("resReel");
+      const elSub           = document.getElementById("resSub");
+      const elNominal       = document.getElementById("resNominal");
+      const elRealVal       = document.getElementById("resRealVal");
+      const elInterets      = document.getElementById("resInterets");
+      const elGain          = document.getElementById("resGain");
+      const elAlert         = document.getElementById("alertMsg");
+      const canvas          = document.getElementById("chart");
+
+      // Store last data for resize
+      let lastNominalData = [];
+      let lastRealData    = [];
+
+      function drawDualLine(canvas, nomData, realData) {
+        if (!canvas || nomData.length < 2) return;
+
+        const { ctx, w, h } = getCtx(canvas);
+        ctx.clearRect(0, 0, w, h);
+
+        const pad = { top: 16, right: 14, bottom: 28, left: 62 };
+        const chartW = w - pad.left - pad.right;
+        const chartH = h - pad.top - pad.bottom;
+
+        const allVals = [...nomData, ...realData];
+        const maxVal  = Math.max(...allVals);
+        const minVal  = Math.min(...allVals) * 0.98;
+        const range   = maxVal - minVal || 1;
+
+        const norm  = v => pad.top + chartH * (1 - (v - minVal) / range);
+        const xOf   = i => pad.left + (i / (nomData.length - 1)) * chartW;
+
+        // Grid
+        const steps = 4;
+        ctx.strokeStyle = COLORS.grid;
+        ctx.lineWidth   = 0.5;
+        ctx.fillStyle   = COLORS.text;
+        ctx.font        = "10px -apple-system, sans-serif";
+        ctx.textAlign   = "right";
+        ctx.textBaseline = "middle";
+
+        for (let s = 0; s <= steps; s++) {
+          const ratio = s / steps;
+          const y = pad.top + chartH * (1 - ratio);
+          const val = minVal + range * ratio;
+          ctx.beginPath();
+          ctx.moveTo(pad.left, y);
+          ctx.lineTo(w - pad.right, y);
+          ctx.stroke();
+          let label;
+          if (val >= 1e3) label = fmtNum(val / 1e3, 1) + " k€";
+          else label = fmtNum(val, 0) + " €";
+          ctx.fillText(label, pad.left - 4, y);
+        }
+
+        // X labels
+        ctx.textAlign   = "center";
+        ctx.textBaseline = "top";
+        const n = nomData.length;
+        const skipEvery = n > 20 ? 5 : (n > 10 ? 2 : 1);
+        for (let i = 0; i < n; i++) {
+          if (i % skipEvery !== 0 && i !== n - 1) continue;
+          ctx.fillText("" + i, xOf(i), h - pad.bottom + 4);
+        }
+
+        // Nominal fill + line
+        ctx.beginPath();
+        ctx.moveTo(xOf(0), norm(nomData[0]));
+        nomData.forEach((v, i) => ctx.lineTo(xOf(i), norm(v)));
+        ctx.lineTo(xOf(n - 1), h - pad.bottom);
+        ctx.lineTo(xOf(0), h - pad.bottom);
+        ctx.closePath();
+        ctx.fillStyle = COLORS.accent + "15";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.strokeStyle = COLORS.accent;
+        ctx.lineWidth   = 2.5;
+        ctx.lineJoin    = "round";
+        ctx.moveTo(xOf(0), norm(nomData[0]));
+        nomData.forEach((v, i) => ctx.lineTo(xOf(i), norm(v)));
+        ctx.stroke();
+
+        // Real fill + line
+        ctx.beginPath();
+        ctx.moveTo(xOf(0), norm(realData[0]));
+        realData.forEach((v, i) => ctx.lineTo(xOf(i), norm(v)));
+        ctx.lineTo(xOf(n - 1), h - pad.bottom);
+        ctx.lineTo(xOf(0), h - pad.bottom);
+        ctx.closePath();
+        ctx.fillStyle = COLORS.danger + "12";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.strokeStyle = COLORS.danger;
+        ctx.lineWidth   = 2;
+        ctx.lineJoin    = "round";
+        ctx.moveTo(xOf(0), norm(realData[0]));
+        realData.forEach((v, i) => ctx.lineTo(xOf(i), norm(v)));
+        ctx.stroke();
+      }
+
+      registerChart(canvas, () => drawDualLine(canvas, lastNominalData, lastRealData));
+
+      function compute() {
+        const M  = parseVal(elMontant.value);
+        const n  = parseVal(elDuree.value);
+        const la = parseVal(elTauxLivret.value) / 100;
+        const f  = parseVal(elTauxInflation.value) / 100;
+
+        let hasError = false;
+
+        const vM = validate(M, "montant", { min: 1, allowZero: false });
+        if (!vM.ok) { showError(elMontant, vM.error); hasError = true; }
+        else showError(elMontant, "");
+
+        const vN = validate(n, "durée", { min: 1, max: 50, allowZero: false });
+        if (!vN.ok) { showError(elDuree, vN.error); hasError = true; }
+        else showError(elDuree, "");
+
+        const vL = validate(la * 100, "taux Livret A", { min: 0.1, max: 20, allowZero: false });
+        if (!vL.ok) { showError(elTauxLivret, vL.error); hasError = true; }
+        else showError(elTauxLivret, "");
+
+        const vF = validate(f * 100, "taux d'inflation", { min: 0.1, max: 50, allowZero: false });
+        if (!vF.ok) { showError(elTauxInflation, vF.error); hasError = true; }
+        else showError(elTauxInflation, "");
+
+        if (hasError) return;
+
+        const nomFinal  = livretANominal(M, la, n);
+        const realFinal = nomFinal / Math.pow(1 + f, n);
+        const rrAnnual  = realReturnRate(la, f);
+        const interets  = nomFinal - M;
+        const gainReal  = realFinal - M;
+
+        // Display
+        const rrPct = rrAnnual * 100;
+        elReel.textContent  = (rrPct >= 0 ? "+" : "") + fmtNum(rrPct, 2) + " %/an";
+        elReel.style.color  = rrAnnual >= 0 ? "var(--accent)" : "var(--danger)";
+
+        elSub.textContent     = `Sur ${n} an${n > 1 ? "s" : ""} : Livret A ${fmtNum(la * 100, 2)} % vs inflation ${fmtNum(f * 100, 2)} %`;
+        elNominal.textContent = fmtEur(nomFinal);
+        elRealVal.textContent = fmtEur(realFinal);
+        elInterets.textContent = "+" + fmtEur(interets);
+
+        if (gainReal >= 0) {
+          elGain.textContent = "+" + fmtEur(gainReal);
+          elGain.style.color = "var(--accent)";
+          elGain.closest(".result-item").classList.remove("danger");
+          elGain.closest(".result-item").classList.add("accent");
+        } else {
+          elGain.textContent = fmtEur(gainReal);
+          elGain.style.color = "var(--danger)";
+          elGain.closest(".result-item").classList.remove("accent");
+          elGain.closest(".result-item").classList.add("danger");
+        }
+
+        // Alert
+        if (rrAnnual < 0) {
+          elAlert.style.display = "block";
+          elAlert.className = "alert alert-danger mt-sm";
+          elAlert.textContent = `⚠️ Ton épargne perd du pouvoir d'achat malgré les intérêts : l'inflation (${fmtNum(f * 100, 2)} %) dépasse le Livret A (${fmtNum(la * 100, 2)} %). Le rendement réel est de ${fmtNum(rrPct, 2)} %/an.`;
+        } else {
+          elAlert.style.display = "block";
+          elAlert.className = "alert alert-info mt-sm";
+          elAlert.textContent = `✅ Le Livret A couvre l'inflation dans ce scénario : rendement réel positif de +${fmtNum(rrPct, 2)} %/an. Votre pouvoir d'achat est préservé.`;
+        }
+
+        // Build chart data
+        lastNominalData = [];
+        lastRealData    = [];
+        for (let y = 0; y <= n; y++) {
+          lastNominalData.push(livretANominal(M, la, y));
+          lastRealData.push(livretANominal(M, la, y) / Math.pow(1 + f, y));
+        }
+
+        drawDualLine(canvas, lastNominalData, lastRealData);
+      }
+
+      [elMontant, elDuree, elTauxLivret, elTauxInflation].forEach(el => {
+        el.addEventListener("input", compute);
+        el.addEventListener("change", compute);
+      });
+
+      compute();
+    })();
+  </script>
+
+</body>
+</html>

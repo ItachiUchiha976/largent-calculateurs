@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur d'inflation et pouvoir d'achat | L'Argent Expliqué</title>
+  <meta name="description" content="Mesurez l'impact de l'inflation sur votre pouvoir d'achat : combien vaudront réellement vos 1 000 € dans 10, 20 ou 30 ans ? Graphique inclus." />
+  <meta property="og:title" content="Calculateur d'inflation et pouvoir d'achat | L'Argent Expliqué" />
+  <meta property="og:description" content="Simulez l'érosion de votre pouvoir d'achat par l'inflation sur le long terme. Résultat immédiat avec graphique." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://tonargentexplique.fr/calculateurs/inflation-pouvoir-achat.html" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculateur d'inflation et pouvoir d'achat",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "description": "Calculez l'impact de l'inflation sur le pouvoir d'achat d'une somme d'argent sur une période donnée.",
+    "inLanguage": "fr-FR",
+    "isAccessibleForFree": true
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="L'Argent Expliqué — Accueil calculateurs">
+        <span class="brand-name">💶 L'Argent Expliqué</span>
+        <span class="brand-sub">Calculateurs gratuits</span>
+      </a>
+      <a href="https://www.youtube.com/@tonargentexplique" class="header-cta" target="_blank" rel="noopener">
+        📺 La chaîne
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="container">
+
+      <nav class="breadcrumb" aria-label="Navigation">
+        <a href="index.html">Calculateurs</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Inflation &amp; pouvoir d'achat</span>
+      </nav>
+
+      <!-- Calculator card -->
+      <div class="calc-card mt-sm">
+        <h1 class="calc-title">💸 Inflation &amp; pouvoir d'achat</h1>
+        <p class="calc-intro">
+          Entrez une somme et un taux d'inflation annuel pour visualiser
+          <strong style="color:var(--text)">combien elle vaudra réellement</strong> dans le futur.
+          1 000 € à 2 % d'inflation ne valent plus que ~552 € en termes de pouvoir d'achat après 30 ans.
+        </p>
+
+        <form id="calcForm" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="montant">Montant aujourd'hui<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="montant" value="1000" min="1" max="10000000" step="100" inputmode="decimal" aria-describedby="montantErr" />
+                <span class="input-unit">€</span>
+              </div>
+              <span class="input-error" id="montantErr" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="taux">Inflation annuelle<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="taux" value="2" min="0.1" max="50" step="0.1" inputmode="decimal" aria-describedby="tauxErr" />
+                <span class="input-unit">%</span>
+              </div>
+              <span class="input-error" id="tauxErr" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-group" style="max-width:200px;">
+            <label for="duree">Durée<span class="required">*</span></label>
+            <div class="input-wrap">
+              <input type="number" id="duree" value="30" min="1" max="50" step="1" inputmode="decimal" aria-describedby="dureeErr" />
+              <span class="input-unit">ans</span>
+            </div>
+            <span class="input-error" id="dureeErr" role="alert"></span>
+          </div>
+
+        </form>
+
+        <!-- Result -->
+        <div class="result-card" id="resultCard" aria-live="polite">
+          <div class="result-label">Pouvoir d'achat réel dans <span id="resN">30</span> ans</div>
+          <div class="result-main" id="resFV" style="color:var(--danger)">—</div>
+          <div class="result-sub" id="resSub"></div>
+          <div class="result-grid" style="margin-top:16px;">
+            <div class="result-item">
+              <div class="ri-label">Valeur nominale (inchangée)</div>
+              <div class="ri-value" id="resNominal">—</div>
+            </div>
+            <div class="result-item danger">
+              <div class="ri-label">Valeur réelle (pouvoir d'achat)</div>
+              <div class="ri-value" id="resReal">—</div>
+            </div>
+            <div class="result-item danger">
+              <div class="ri-label">Perte de pouvoir d'achat (€)</div>
+              <div class="ri-value" id="resLossEur">—</div>
+            </div>
+            <div class="result-item danger">
+              <div class="ri-label">Perte de pouvoir d'achat (%)</div>
+              <div class="ri-value" id="resLossPct">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alert -->
+        <div class="alert alert-warn mt-sm" id="alertMsg" role="alert" style="display:none;"></div>
+
+        <!-- Ad slot -->
+        <!-- AD_SLOT: rectangle 300x250 sous les résultats (à activer après trafic Google AdSense) -->
+        <div class="ad-placeholder"></div>
+
+        <!-- Chart -->
+        <div class="chart-wrap mt-md">
+          <div class="chart-title">Pouvoir d'achat réel par décennie</div>
+          <canvas id="chart" data-height="200" role="img" aria-label="Graphique de la perte de pouvoir d'achat par décennie"></canvas>
+        </div>
+
+      </div><!-- /calc-card -->
+
+      <!-- How it works -->
+      <div class="how-it-works">
+        <div class="how-title">📐 Comment ça marche</div>
+        <p>
+          L'<strong style="color:var(--text)">inflation</strong> réduit chaque année le pouvoir d'achat d'une même somme d'argent.
+          Si vous gardez 1 000 € sous le matelas avec une inflation à 2 %/an, ces 1 000 € ne vous permettront plus d'acheter la même chose dans 10 ans.
+        </p>
+        <div class="formula-block">
+          Valeur réelle = Montant / (1 + f)^n
+        </div>
+        <p>
+          Où <em>f</em> = taux d'inflation annuel (décimal) et <em>n</em> = durée en années.
+          Exemple : 1 000 € / (1,02)^30 ≈ <strong style="color:var(--accent)">551,97 €</strong> — soit une perte de 44,8 % du pouvoir d'achat.
+        </p>
+        <p>
+          C'est pour cela que garder son épargne sur un compte non rémunéré ou sous-rémunéré (taux &lt; inflation)
+          revient à s'appauvrir progressivement, même si le solde nominal reste le même.
+        </p>
+      </div>
+
+      <!-- CTA YouTube -->
+      <div class="mt-md">
+        <a href="https://www.youtube.com/@tonargentexplique" class="yt-cta" target="_blank" rel="noopener">
+          <span class="yt-cta-icon">📺</span>
+          <span>Comprendre ton argent en vidéo →</span>
+          <span class="yt-cta-arrow">›</span>
+        </a>
+      </div>
+
+      <!-- Related -->
+      <div class="related-links mt-md">
+        <div class="related-title">Autres calculateurs</div>
+        <ul class="related-list" aria-label="Liens vers d'autres calculateurs">
+          <li><a href="livret-a-vs-inflation.html">Livret A vs Inflation — votre épargne vous protège-t-elle ?</a></li>
+          <li><a href="interets-composes.html">Intérêts composés — simuler votre croissance</a></li>
+          <li><a href="epargne-mensuelle.html">Épargne mensuelle — quel capital atteindre ?</a></li>
+          <li><a href="regle-72.html">Règle des 72 — combien de temps pour doubler ?</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-yt">
+        <a href="https://www.youtube.com/@tonargentexplique" target="_blank" rel="noopener">
+          📺 L'Argent Expliqué — La chaîne YouTube
+        </a>
+      </div>
+      <p class="footer-disclaimer">
+        <strong>⚠️ Contenu éducatif uniquement.</strong> Ces calculateurs ne constituent pas un conseil financier ou en investissement. Les rendements utilisés sont illustratifs et ne sont pas garantis. Consultez un professionnel agréé pour toute décision.
+      </p>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="interets-composes.html">Intérêts composés</a>
+        <a href="regle-72.html">Règle des 72</a>
+        <a href="epargne-mensuelle.html">Épargne</a>
+        <a href="livret-a-vs-inflation.html">Livret A</a>
+      </div>
+      <p class="footer-copy">© 2026 L'Argent Expliqué — Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const elMontant  = document.getElementById("montant");
+      const elTaux     = document.getElementById("taux");
+      const elDuree    = document.getElementById("duree");
+      const elFV       = document.getElementById("resFV");
+      const elSub      = document.getElementById("resSub");
+      const elN        = document.getElementById("resN");
+      const elNominal  = document.getElementById("resNominal");
+      const elReal     = document.getElementById("resReal");
+      const elLossEur  = document.getElementById("resLossEur");
+      const elLossPct  = document.getElementById("resLossPct");
+      const elAlert    = document.getElementById("alertMsg");
+      const canvas     = document.getElementById("chart");
+
+      let lastBarData = [];
+
+      function compute() {
+        const M = parseVal(elMontant.value);
+        const f = parseVal(elTaux.value) / 100;
+        const n = parseVal(elDuree.value);
+
+        let hasError = false;
+
+        const vM = validate(M, "montant", { min: 1, allowZero: false });
+        if (!vM.ok) { showError(elMontant, vM.error); hasError = true; }
+        else showError(elMontant, "");
+
+        const vF = validate(f * 100, "taux d'inflation", { min: 0.1, max: 50, allowZero: false });
+        if (!vF.ok) { showError(elTaux, vF.error); hasError = true; }
+        else showError(elTaux, "");
+
+        const vN = validate(n, "durée", { min: 1, max: 50, allowZero: false });
+        if (!vN.ok) { showError(elDuree, vN.error); hasError = true; }
+        else showError(elDuree, "");
+
+        if (hasError) return;
+
+        const rv      = realValue(M, f, n);
+        const loss    = M - rv;
+        const lossPct = loss / M;
+
+        elN.textContent        = n;
+        elFV.textContent       = fmtEur(rv);
+        elSub.textContent      = `${fmtEur(M)} aujourd'hui à ${fmtNum(f * 100, 2)} % d'inflation / an pendant ${n} an${n > 1 ? "s" : ""}`;
+        elNominal.textContent  = fmtEur(M);
+        elReal.textContent     = fmtEur(rv);
+        elLossEur.textContent  = "−" + fmtEur(loss);
+        elLossPct.textContent  = "−" + fmtPct(lossPct, 1);
+
+        // Warning
+        if (lossPct > 0.5) {
+          elAlert.style.display = "block";
+          elAlert.textContent = `⚠️ À ${fmtNum(f * 100, 1)} % d'inflation, votre argent perd plus de la moitié de sa valeur réelle en ${n} ans. C'est pourquoi investir (même modestement) est crucial pour préserver son patrimoine.`;
+        } else {
+          elAlert.style.display = "none";
+        }
+
+        // Bar chart data by decade
+        const decadeCount = Math.min(Math.ceil(n / 10) * 10, 50);
+        const step = n <= 10 ? 1 : (n <= 20 ? 2 : (n <= 30 ? 5 : 10));
+        const barData = [];
+
+        for (let y = 0; y <= n; y += step) {
+          barData.push({ label: y + " ans", value: realValue(M, f, y) });
+        }
+        // Ensure final year is included
+        if (barData[barData.length - 1].label !== n + " ans") {
+          barData.push({ label: n + " ans", value: rv });
+        }
+
+        lastBarData = barData;
+
+        const colorFn = (i, total) => {
+          // Gradient from accent to danger
+          const ratio = i / Math.max(total - 1, 1);
+          // accent: #1FE08A → danger: #FF6B6B
+          const r = Math.round(31 + ratio * (255 - 31));
+          const g = Math.round(224 + ratio * (107 - 224));
+          const b = Math.round(138 + ratio * (107 - 138));
+          return `rgb(${r},${g},${b})`;
+        };
+
+        drawBarChart(canvas, barData, colorFn);
+      }
+
+      registerChart(canvas, () => drawBarChart(canvas, lastBarData, (i, total) => {
+        const ratio = i / Math.max(total - 1, 1);
+        const r = Math.round(31 + ratio * (255 - 31));
+        const g = Math.round(224 + ratio * (107 - 224));
+        const b = Math.round(138 + ratio * (107 - 138));
+        return `rgb(${r},${g},${b})`;
+      }));
+
+      [elMontant, elTaux, elDuree].forEach(el => {
+        el.addEventListener("input", compute);
+        el.addEventListener("change", compute);
+      });
+
+      compute();
+    })();
+  </script>
+
+</body>
+</html>
