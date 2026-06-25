@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tonargentexplique.fr/calculateurs/sitemap.xml
+Sitemap: https://itachiuchiha976.github.io/largent-calculateurs/sitemap.xml
