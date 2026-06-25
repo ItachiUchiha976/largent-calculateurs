@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur de mensualité de prêt (auto, conso) gratuit | L'Argent Expliqué</title>
+  <meta name="description" content="Calculez en secondes la mensualité de votre prêt auto ou crédit conso : capital, taux, durée. Coût total et intérêts affichés. Gratuit, sans inscription." />
+  <meta property="og:title" content="Calculateur de mensualité de prêt | L'Argent Expliqué" />
+  <meta property="og:description" content="Mensualité, coût total et intérêts de votre crédit auto ou conso. Résultat instantané." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://itachiuchiha976.github.io/largent-calculateurs/mensualite-pret.html" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculateur de mensualité de prêt",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "description": "Calculez la mensualité, le coût total et les intérêts d'un crédit auto ou à la consommation.",
+    "inLanguage": "fr-FR",
+    "isAccessibleForFree": true,
+    "url": "https://itachiuchiha976.github.io/largent-calculateurs/mensualite-pret.html"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="L'Argent Expliqué — Accueil calculateurs">
+        <span class="brand-name">💶 L'Argent Expliqué</span>
+        <span class="brand-sub">Calculateurs gratuits</span>
+      </a>
+      <a href="https://www.youtube.com/@tonargentexplique" class="header-cta" target="_blank" rel="noopener">
+        📺 La chaîne
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="container">
+
+      <nav class="breadcrumb" aria-label="Navigation">
+        <a href="index.html">Calculateurs</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Crédit &amp; emprunt</span>
+        <span class="breadcrumb-sep">›</span>
+        <span>Mensualité de prêt</span>
+      </nav>
+
+      <!-- Calculator card -->
+      <div class="calc-card mt-sm">
+        <h1 class="calc-title">🚗 Mensualité de prêt</h1>
+        <p class="calc-intro">
+          Entrez le montant emprunté, le taux annuel et la durée pour obtenir votre mensualité.
+          Valable pour un crédit auto, un prêt personnel ou tout crédit à la consommation.
+          <em style="color:var(--text-muted); font-style:normal;"> Taux indicatif — vérifiez le TAEG auprès de votre établissement prêteur.</em>
+        </p>
+
+        <form id="calcForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="capital">Montant emprunté<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="capital" value="10000" min="100" max="1000000" step="100" inputmode="decimal" aria-describedby="capitalErr" />
+                <span class="input-unit">€</span>
+              </div>
+              <span class="input-error" id="capitalErr" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="taux">Taux annuel (TAEG)<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="taux" value="5" min="0.01" max="50" step="0.1" inputmode="decimal" aria-describedby="tauxErr" />
+                <span class="input-unit">%</span>
+              </div>
+              <span class="input-error" id="tauxErr" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dureeAns">Durée<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="dureeAns" value="3" min="1" max="30" step="1" inputmode="decimal" aria-describedby="dureeErr" />
+                <span class="input-unit">ans</span>
+              </div>
+              <span class="input-error" id="dureeErr" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="dureeMode">Ou en mois</label>
+              <div class="input-wrap">
+                <input type="number" id="dureeMois" value="36" min="1" max="360" step="1" inputmode="decimal" />
+                <span class="input-unit">mois</span>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- Result -->
+        <div class="result-card" id="resultCard" aria-live="polite">
+          <div class="result-label">Mensualité</div>
+          <div class="result-main" id="resMensualite">—</div>
+          <div class="result-sub" id="resSub"></div>
+          <div class="result-grid" style="margin-top:16px;">
+            <div class="result-item">
+              <div class="ri-label">Capital emprunté</div>
+              <div class="ri-value" id="resCapital">—</div>
+            </div>
+            <div class="result-item accent">
+              <div class="ri-label">Total intérêts</div>
+              <div class="ri-value" id="resInterets">—</div>
+            </div>
+            <div class="result-item">
+              <div class="ri-label">Total remboursé</div>
+              <div class="ri-value" id="resTotal">—</div>
+            </div>
+            <div class="result-item accent">
+              <div class="ri-label">Coût du crédit</div>
+              <div class="ri-value" id="resCout">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ad slot -->
+        <!-- AD_SLOT: rectangle 300x250 sous les résultats -->
+        <div class="ad-placeholder"></div>
+
+        <!-- Amortization mini-table -->
+        <div id="tableWrap" class="mt-md" style="display:none;">
+          <div class="how-title" style="margin-bottom:8px;">📋 Tableau d'amortissement (extrait)</div>
+          <div style="overflow-x:auto;">
+            <table class="data-table" id="amortTable">
+              <thead>
+                <tr>
+                  <th>Mois</th>
+                  <th>Mensualité</th>
+                  <th>Capital</th>
+                  <th>Intérêts</th>
+                  <th>Capital restant</th>
+                </tr>
+              </thead>
+              <tbody id="amortBody"></tbody>
+            </table>
+          </div>
+          <p style="font-size:0.78rem; color:var(--text-muted); margin-top:6px;">Premiers et derniers mois affichés.</p>
+        </div>
+
+      </div><!-- /calc-card -->
+
+      <!-- How it works -->
+      <div class="how-it-works">
+        <div class="how-title">📐 Comment ça marche</div>
+        <p>
+          La mensualité d'un prêt à taux fixe se calcule avec la formule de <strong style="color:var(--text)">l'annuité constante</strong> :
+          chaque mois, vous remboursez une fraction du capital <em>et</em> les intérêts sur ce qui reste dû.
+        </p>
+        <div class="formula-block">
+          t = taux_annuel / 12<br>
+          n = durée en mois<br>
+          M = C × t / (1 − (1 + t)^−n)
+        </div>
+        <p>
+          Exemple vérifié : 10 000 € à 5 % sur 3 ans (36 mois) → t = 0,004167 → <strong style="color:var(--accent)">M = 299,71 €/mois</strong>.<br>
+          Total remboursé = 10 789,52 € → intérêts = 789,52 €.
+        </p>
+        <p>
+          <strong style="color:var(--text)">Attention :</strong> ce calculateur utilise uniquement le taux nominal. Le TAEG (Taux Annuel Effectif Global)
+          inclut aussi les frais de dossier et assurances — il est indiqué obligatoirement dans votre offre de prêt.
+        </p>
+      </div>
+
+      <!-- CTA YouTube -->
+      <div class="mt-md">
+        <a href="https://www.youtube.com/@tonargentexplique" class="yt-cta" target="_blank" rel="noopener">
+          <span class="yt-cta-icon">📺</span>
+          <span>Comprendre ton argent en vidéo →</span>
+          <span class="yt-cta-arrow">›</span>
+        </a>
+      </div>
+
+      <!-- SEO text block -->
+      <div class="how-it-works mt-md">
+        <div class="how-title">💡 À quoi sert ce calculateur ?</div>
+        <p>
+          Avant de signer un crédit auto ou un prêt personnel, il est essentiel de connaître <strong style="color:var(--text)">votre mensualité exacte</strong>
+          et le coût réel du crédit. Un taux de 5 % sur 3 ans peut sembler raisonnable, mais sur une voiture à 20 000 €,
+          cela représente plus de 1 500 € d'intérêts supplémentaires.
+        </p>
+        <p>
+          Utilisez ce calculateur pour <strong style="color:var(--text)">comparer plusieurs offres</strong> : un taux plus bas ou une durée plus courte
+          peut faire économiser plusieurs centaines d'euros. La règle générale : plus la durée est longue, plus les intérêts s'accumulent.
+        </p>
+        <p>
+          Ce calculateur est fourni à titre <strong style="color:var(--text)">éducatif et indicatif uniquement</strong>. Il ne constitue pas un conseil financier.
+          Les conditions réelles de votre crédit dépendent de votre profil et de l'établissement prêteur.
+        </p>
+      </div>
+
+      <!-- Related -->
+      <div class="related-links mt-md">
+        <div class="related-title">Calculateurs liés</div>
+        <ul class="related-list" aria-label="Calculateurs liés au crédit">
+          <li><a href="cout-total-credit.html">Coût total du crédit — intérêts sur toute la durée</a></li>
+          <li><a href="remboursement-anticipe.html">Remboursement anticipé — économie d'intérêts</a></li>
+          <li><a href="credit-immobilier.html">Mensualité crédit immobilier</a></li>
+          <li><a href="capacite-emprunt.html">Capacité d'emprunt — règle des 35 %</a></li>
+          <li><a href="objectif-epargne.html">Objectif épargne — combien mettre de côté ?</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-yt">
+        <a href="https://www.youtube.com/@tonargentexplique" target="_blank" rel="noopener">
+          📺 L'Argent Expliqué — La chaîne YouTube
+        </a>
+      </div>
+      <p class="footer-disclaimer">
+        <strong>⚠️ Contenu éducatif uniquement.</strong> Ces calculateurs ne constituent pas un conseil financier ou en investissement. Les résultats sont des simulations mathématiques. Consultez un professionnel agréé (conseiller financier, courtier) pour toute décision de crédit.
+      </p>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="credit-immobilier.html">Crédit immo</a>
+        <a href="capacite-emprunt.html">Capacité emprunt</a>
+        <a href="cout-total-credit.html">Coût crédit</a>
+        <a href="remboursement-anticipe.html">Remboursement anticipé</a>
+        <a href="salaire-brut-net.html">Salaire net</a>
+      </div>
+      <p class="footer-copy">© 2026 L'Argent Expliqué — Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const elCapital    = document.getElementById("capital");
+      const elTaux       = document.getElementById("taux");
+      const elDureeAns   = document.getElementById("dureeAns");
+      const elDureeMois  = document.getElementById("dureeMois");
+      const elMensualite = document.getElementById("resMensualite");
+      const elSub        = document.getElementById("resSub");
+      const elResCapital = document.getElementById("resCapital");
+      const elInterets   = document.getElementById("resInterets");
+      const elTotal      = document.getElementById("resTotal");
+      const elCout       = document.getElementById("resCout");
+      const tableWrap    = document.getElementById("tableWrap");
+      const amortBody    = document.getElementById("amortBody");
+
+      // Sync ans <-> mois
+      let syncLock = false;
+      elDureeAns.addEventListener("input", function () {
+        if (syncLock) return;
+        syncLock = true;
+        const ans = parseVal(this.value);
+        if (!isNaN(ans)) elDureeMois.value = Math.round(ans * 12);
+        syncLock = false;
+        compute();
+      });
+      elDureeMois.addEventListener("input", function () {
+        if (syncLock) return;
+        syncLock = true;
+        const mois = parseVal(this.value);
+        if (!isNaN(mois)) elDureeAns.value = fmtNum(mois / 12, 2);
+        syncLock = false;
+        compute();
+      });
+
+      function compute() {
+        const C = parseVal(elCapital.value);
+        const r = parseVal(elTaux.value) / 100;
+        const n = parseVal(elDureeMois.value);
+
+        let hasError = false;
+
+        const vC = validate(C, "montant emprunté", { min: 100, allowZero: false });
+        if (!vC.ok) { showError(elCapital, vC.error); hasError = true; }
+        else { showError(elCapital, ""); }
+
+        const vR = validate(r * 100, "taux annuel", { min: 0.01, max: 50, allowZero: false });
+        if (!vR.ok) { showError(elTaux, vR.error); hasError = true; }
+        else { showError(elTaux, ""); }
+
+        const vN = validate(n, "durée", { min: 1, max: 360, allowZero: false });
+        if (!vN.ok) { showError(elDureeAns, vN.error); hasError = true; }
+        else { showError(elDureeAns, ""); }
+
+        if (hasError) return;
+
+        // Mensualité: M = C * t / (1 - (1+t)^-n)
+        // Formule vérifiée: 10 000 € à 5%/an sur 36 mois → M = 299,71 €
+        const t = r / 12;
+        const M = C * t / (1 - Math.pow(1 + t, -n));
+        const totalPaye = M * n;
+        const totalInterets = totalPaye - C;
+        const pctCout = totalInterets / C * 100;
+
+        elMensualite.textContent = fmtEur(M);
+        elSub.textContent = fmtNum(n, 0) + " mensualité" + (n > 1 ? "s" : "") + " de " + fmtEur(M);
+        elResCapital.textContent = fmtEur(C);
+        elInterets.textContent   = fmtEur(totalInterets);
+        elTotal.textContent      = fmtEur(totalPaye);
+        elCout.textContent       = fmtPct(pctCout / 100);
+
+        // Amortization table (first 3 + last 3 months)
+        buildAmortTable(C, t, n, M);
+      }
+
+      function buildAmortTable(C, t, n, M) {
+        let solde = C;
+        const rows = [];
+        for (let k = 1; k <= n; k++) {
+          const interets_k = solde * t;
+          const capital_k  = M - interets_k;
+          solde -= capital_k;
+          if (solde < 0.005) solde = 0;
+          rows.push({ k, M, capital_k, interets_k, solde });
+        }
+        // Show first 3 and last 3
+        const display = n <= 6
+          ? rows
+          : [...rows.slice(0, 3), null, ...rows.slice(-3)];
+
+        amortBody.innerHTML = display.map(r => {
+          if (!r) return '<tr><td colspan="5" style="text-align:center;color:var(--text-muted);">…</td></tr>';
+          return `<tr>
+            <td>${r.k}</td>
+            <td>${fmtEur(r.M)}</td>
+            <td class="td-accent">${fmtEur(r.capital_k)}</td>
+            <td>${fmtEur(r.interets_k)}</td>
+            <td>${fmtEur(r.solde)}</td>
+          </tr>`;
+        }).join("");
+        tableWrap.style.display = "block";
+      }
+
+      [elCapital, elTaux].forEach(el => {
+        el.addEventListener("input", compute);
+        el.addEventListener("change", compute);
+      });
+
+      compute();
+    })();
+  </script>
+
+</body>
+</html>

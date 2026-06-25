@@ -4,21 +4,151 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Calculateurs de finances personnelles gratuits | L'Argent Expliqué</title>
-  <meta name="description" content="9 calculateurs gratuits de finances personnelles en français : crédit immobilier, salaire brut/net, capacité d'emprunt, rendement locatif, intérêts composés, inflation et plus." />
+  <meta name="description" content="14 calculateurs gratuits de finances personnelles en français : crédit immobilier, salaire brut/net, TVA, intérêts composés, objectif épargne, inflation, rendement locatif et plus. Sans inscription." />
   <meta property="og:title" content="Calculateurs de finances personnelles gratuits | L'Argent Expliqué" />
-  <meta property="og:description" content="9 calculateurs gratuits : mensualité crédit immobilier, salaire brut/net, capacité d'emprunt, rendement locatif, intérêts composés, inflation et plus." />
+  <meta property="og:description" content="14 calculateurs gratuits : mensualité crédit, salaire net, TVA, intérêts composés, objectif épargne, capacité d'emprunt, rendement locatif et plus." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://itachiuchiha976.github.io/largent-calculateurs/" />
   <link rel="canonical" href="https://itachiuchiha976.github.io/largent-calculateurs/" />
   <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    /* Category headings */
+    .cat-heading {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--accent);
+      margin: 28px 0 10px;
+      padding: 0 2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cat-heading::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Email capture */
+    .email-capture {
+      background: linear-gradient(135deg, #0E3325 0%, #0f3d28 100%);
+      border: 1.5px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      margin-top: 0;
+    }
+    .email-capture-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .email-capture-sub {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .email-form {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .email-form input[type="email"] {
+      flex: 1;
+      min-width: 180px;
+      background: var(--bg-input);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 0.96rem;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      min-height: 44px;
+    }
+    .email-form input[type="email"]:focus { border-color: var(--accent); }
+    .email-form input[type="email"]::placeholder { color: var(--text-muted); opacity: 0.6; }
+    .email-form button {
+      background: var(--accent);
+      color: #0A2A1E;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 11px 18px;
+      cursor: pointer;
+      transition: background 0.2s;
+      min-height: 44px;
+      white-space: nowrap;
+    }
+    .email-form button:hover { background: var(--accent-dim); }
+    .email-note {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* Hero intro */
+    .hero-intro {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 28px 20px 24px;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .hero-icon { font-size: 2.4rem; margin-bottom: 10px; }
+    .hero-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+      line-height: 1.25;
+    }
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      max-width: 480px;
+      margin: 0 auto 16px;
+    }
+    .hero-badges {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .hero-badge {
+      font-size: 0.75rem;
+      background: rgba(31,224,138,0.1);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      color: var(--text-muted);
+    }
+  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "L'Argent Expliqué — Calculateurs",
     "url": "https://itachiuchiha976.github.io/largent-calculateurs/",
-    "description": "9 calculateurs gratuits de finances personnelles en français.",
-    "inLanguage": "fr-FR"
+    "description": "14 calculateurs gratuits de finances personnelles en français : crédit, épargne, salaire, immobilier, TVA.",
+    "inLanguage": "fr-FR",
+    "publisher": {
+      "@type": "Organization",
+      "name": "L'Argent Expliqué",
+      "url": "https://www.youtube.com/@tonargentexplique"
+    }
   }
   </script>
 </head>
@@ -42,16 +172,26 @@
     <div class="container">
 
       <!-- Hero -->
-      <div class="calc-card" style="text-align:center; padding: 32px 20px 28px;">
-        <div style="font-size:2.4rem; margin-bottom:10px;">📊</div>
-        <h1 class="calc-title" style="font-size:1.75rem;">Calculateurs de finances personnelles</h1>
-        <p class="calc-intro" style="max-width:480px; margin: 0 auto 0;">
-          Des outils simples et gratuits pour comprendre <strong style="color:var(--text);">votre argent</strong> —
-          crédit immobilier, salaire net, capacité d'emprunt, rendement locatif, intérêts composés, inflation. Aucune inscription, aucun cookie de tracking.
+      <div class="hero-intro">
+        <div class="hero-icon">📊</div>
+        <h1 class="hero-title">Vos finances personnelles, en clair</h1>
+        <p class="hero-desc">
+          14 calculateurs gratuits pour comprendre votre argent en quelques secondes —
+          crédit, épargne, salaire, immobilier, TVA.
+          Aucune inscription. Aucun cookie de tracking.
         </p>
+        <div class="hero-badges">
+          <span class="hero-badge">✔ 100 % gratuit</span>
+          <span class="hero-badge">✔ Sans inscription</span>
+          <span class="hero-badge">✔ Mobile-friendly</span>
+          <span class="hero-badge">✔ Formules vérifiées</span>
+        </div>
       </div>
 
-      <!-- Grid of calculators -->
+      <!-- ============================= -->
+      <!-- CATEGORIE 1 — ÉPARGNE        -->
+      <!-- ============================= -->
+      <div class="cat-heading">📈 Épargne &amp; placements</div>
       <div class="hub-grid">
 
         <a href="interets-composes.html" class="hub-card">
@@ -63,11 +203,11 @@
           <div class="hub-card-arrow">›</div>
         </a>
 
-        <a href="regle-72.html" class="hub-card">
-          <div class="hub-icon">⚡</div>
+        <a href="objectif-epargne.html" class="hub-card">
+          <div class="hub-icon">🎯</div>
           <div class="hub-card-body">
-            <div class="hub-card-title">Règle des 72</div>
-            <div class="hub-card-desc">Combien de temps pour doubler votre capital ? Entrez un taux annuel et obtenez la réponse en secondes.</div>
+            <div class="hub-card-title">Objectif épargne</div>
+            <div class="hub-card-desc">Combien mettre de côté chaque mois pour atteindre 10 000 €, 50 000 € ou plus ? Calculez votre versement mensuel cible.</div>
           </div>
           <div class="hub-card-arrow">›</div>
         </a>
@@ -81,11 +221,11 @@
           <div class="hub-card-arrow">›</div>
         </a>
 
-        <a href="inflation-pouvoir-achat.html" class="hub-card">
-          <div class="hub-icon">💸</div>
+        <a href="regle-72.html" class="hub-card">
+          <div class="hub-icon">⚡</div>
           <div class="hub-card-body">
-            <div class="hub-card-title">Inflation & pouvoir d'achat</div>
-            <div class="hub-card-desc">Mesurez combien vaut réellement votre argent dans 10, 20 ou 30 ans si l'inflation érode sa valeur année après année.</div>
+            <div class="hub-card-title">Règle des 72</div>
+            <div class="hub-card-desc">Combien de temps pour doubler votre capital ? Entrez un taux annuel et obtenez la réponse en secondes.</div>
           </div>
           <div class="hub-card-arrow">›</div>
         </a>
@@ -99,11 +239,46 @@
           <div class="hub-card-arrow">›</div>
         </a>
 
-        <a href="salaire-brut-net.html" class="hub-card">
-          <div class="hub-icon">💼</div>
+        <a href="inflation-pouvoir-achat.html" class="hub-card">
+          <div class="hub-icon">💸</div>
           <div class="hub-card-body">
-            <div class="hub-card-title">Salaire brut ↔ net</div>
-            <div class="hub-card-desc">Convertissez votre salaire brut en net (ou l'inverse) selon votre statut cadre ou non-cadre. Résultat mensuel + annuel.</div>
+            <div class="hub-card-title">Inflation &amp; pouvoir d'achat</div>
+            <div class="hub-card-desc">Mesurez combien vaut réellement votre argent dans 10, 20 ou 30 ans si l'inflation érode sa valeur année après année.</div>
+          </div>
+          <div class="hub-card-arrow">›</div>
+        </a>
+
+      </div>
+
+      <!-- ============================= -->
+      <!-- CATEGORIE 2 — CREDIT         -->
+      <!-- ============================= -->
+      <div class="cat-heading">🏦 Crédit &amp; emprunt</div>
+      <div class="hub-grid">
+
+        <a href="mensualite-pret.html" class="hub-card">
+          <div class="hub-icon">🚗</div>
+          <div class="hub-card-body">
+            <div class="hub-card-title">Mensualité de prêt</div>
+            <div class="hub-card-desc">Calculez votre mensualité de crédit auto ou conso, le coût total et les intérêts. Tableau d'amortissement inclus.</div>
+          </div>
+          <div class="hub-card-arrow">›</div>
+        </a>
+
+        <a href="cout-total-credit.html" class="hub-card">
+          <div class="hub-icon">💰</div>
+          <div class="hub-card-body">
+            <div class="hub-card-title">Coût total du crédit</div>
+            <div class="hub-card-desc">Combien payez-vous en plus du capital ? Comparez deux scénarios (taux, durée) pour identifier la meilleure option.</div>
+          </div>
+          <div class="hub-card-arrow">›</div>
+        </a>
+
+        <a href="remboursement-anticipe.html" class="hub-card">
+          <div class="hub-icon">⏩</div>
+          <div class="hub-card-body">
+            <div class="hub-card-title">Remboursement anticipé</div>
+            <div class="hub-card-desc">Capital restant dû, économie d'intérêts et pénalités IRA estimées si vous remboursez votre crédit plus tôt.</div>
           </div>
           <div class="hub-card-arrow">›</div>
         </a>
@@ -112,7 +287,7 @@
           <div class="hub-icon">🏠</div>
           <div class="hub-card-body">
             <div class="hub-card-title">Mensualité crédit immobilier</div>
-            <div class="hub-card-desc">Calculez votre mensualité de prêt, le coût total du crédit et les intérêts. Graphique du capital restant dû inclus.</div>
+            <div class="hub-card-desc">Calculez votre mensualité de prêt immo, le coût total du crédit et les intérêts. Graphique du capital restant dû inclus.</div>
           </div>
           <div class="hub-card-arrow">›</div>
         </a>
@@ -126,6 +301,40 @@
           <div class="hub-card-arrow">›</div>
         </a>
 
+      </div>
+
+      <!-- ============================= -->
+      <!-- CATEGORIE 3 — SALAIRE        -->
+      <!-- ============================= -->
+      <div class="cat-heading">💼 Salaire &amp; impôts</div>
+      <div class="hub-grid">
+
+        <a href="salaire-brut-net.html" class="hub-card">
+          <div class="hub-icon">💼</div>
+          <div class="hub-card-body">
+            <div class="hub-card-title">Salaire brut ↔ net</div>
+            <div class="hub-card-desc">Convertissez votre salaire brut en net (ou l'inverse) selon votre statut cadre ou non-cadre. Résultat mensuel + annuel.</div>
+          </div>
+          <div class="hub-card-arrow">›</div>
+        </a>
+
+        <a href="calcul-tva.html" class="hub-card">
+          <div class="hub-icon">🧾</div>
+          <div class="hub-card-body">
+            <div class="hub-card-title">Calcul TVA</div>
+            <div class="hub-card-desc">Convertissez HT en TTC ou TTC en HT pour les taux 20 %, 10 % et 5,5 %. Résultat instantané pour les 3 taux simultanément.</div>
+          </div>
+          <div class="hub-card-arrow">›</div>
+        </a>
+
+      </div>
+
+      <!-- ============================= -->
+      <!-- CATEGORIE 4 — IMMOBILIER     -->
+      <!-- ============================= -->
+      <div class="cat-heading">🏘️ Immobilier</div>
+      <div class="hub-grid">
+
         <a href="rendement-locatif.html" class="hub-card">
           <div class="hub-icon">🏘️</div>
           <div class="hub-card-body">
@@ -135,6 +344,41 @@
           <div class="hub-card-arrow">›</div>
         </a>
 
+        <a href="capacite-emprunt.html" class="hub-card">
+          <div class="hub-icon">📊</div>
+          <div class="hub-card-body">
+            <div class="hub-card-title">Capacité d'emprunt</div>
+            <div class="hub-card-desc">Calculez votre budget total d'achat immobilier selon vos revenus et votre apport. Règle des 35 % HCSF.</div>
+          </div>
+          <div class="hub-card-arrow">›</div>
+        </a>
+
+        <a href="credit-immobilier.html" class="hub-card">
+          <div class="hub-icon">🏠</div>
+          <div class="hub-card-body">
+            <div class="hub-card-title">Mensualité crédit immobilier</div>
+            <div class="hub-card-desc">Simulez votre prêt immobilier : mensualité, coût total, tableau d'amortissement et graphique d'évolution du capital.</div>
+          </div>
+          <div class="hub-card-arrow">›</div>
+        </a>
+
+      </div>
+
+      <!-- Email capture -->
+      <div class="email-capture mt-md">
+        <div class="email-capture-title">📬 Reçois nos meilleurs outils</div>
+        <p class="email-capture-sub">
+          De nouveaux calculateurs et guides pratiques sur les finances perso, directement dans ta boîte mail. Gratuit, sans spam.
+        </p>
+        <!-- TODO: brancher sur Formspree ou Brevo — remplacer action="#" par l'endpoint réel -->
+        <form class="email-form" action="mailto:contact@largentexplique.fr" method="get" onsubmit="return handleEmailSubmit(event)">
+          <input type="email" name="email" placeholder="ton@email.fr" autocomplete="email" required aria-label="Adresse email" />
+          <button type="submit">S'inscrire →</button>
+        </form>
+        <p class="email-note">📌 En t'inscrivant, tu acceptes de recevoir des emails de L'Argent Expliqué. Désinscription en 1 clic.</p>
+        <div id="emailConfirm" style="display:none; margin-top:10px; font-size:0.84rem; color:var(--accent);">
+          ✔ Inscription prise en compte — à très vite dans ta boîte mail !
+        </div>
       </div>
 
       <!-- CTA YouTube -->
@@ -149,13 +393,13 @@
       <!-- About section -->
       <div class="how-it-works mt-md">
         <div class="how-title">ℹ️ À propos de ces outils</div>
-        <p>Ces calculateurs sont conçus pour l'<strong style="color:var(--text)">éducation financière</strong> : comprendre les mécanismes de base (capitalisation, inflation, rendement réel) de façon visuelle et interactive.</p>
-        <p>Toutes les formules sont basées sur des mathématiques financières standards. Les taux par défaut sont des hypothèses pédagogiques — ils ne constituent pas une prévision ou une promesse de rendement.</p>
+        <p>Ces calculateurs sont conçus pour l'<strong style="color:var(--text)">éducation financière</strong> : comprendre les mécanismes de base (capitalisation, inflation, rendement réel, coût du crédit) de façon visuelle et interactive.</p>
+        <p>Toutes les formules sont basées sur des mathématiques financières standards et vérifiées manuellement. Les taux par défaut sont des hypothèses pédagogiques — ils ne constituent pas une prévision ou une promesse de rendement.</p>
         <p>Développé en HTML/CSS/JS pur, <strong style="color:var(--text)">sans dépendance externe</strong>, sans publicité, sans collecte de données.</p>
       </div>
 
       <!-- Ad slot (hidden until AdSense) -->
-      <!-- AD_SLOT: bannière 320x50 ou 728x90 sous le contenu principal (à activer après trafic) -->
+      <!-- AD_SLOT: bannière 320x50 ou 728x90 sous le contenu principal (à activer après trafic Google AdSense) -->
       <div class="ad-placeholder"></div>
 
     </div>
@@ -173,19 +417,38 @@
         <strong>⚠️ Contenu éducatif uniquement.</strong> Ces calculateurs ne constituent pas un conseil financier ou en investissement. Les rendements utilisés sont illustratifs et ne sont pas garantis. Les résultats produits sont des simulations mathématiques. Consultez un professionnel agréé (conseiller en investissements financiers — CIF) pour toute décision financière personnelle.
       </p>
       <div class="footer-links">
-        <a href="salaire-brut-net.html">Salaire brut/net</a>
+        <a href="interets-composes.html">Intérêts composés</a>
+        <a href="objectif-epargne.html">Objectif épargne</a>
+        <a href="mensualite-pret.html">Mensualité prêt</a>
+        <a href="cout-total-credit.html">Coût crédit</a>
+        <a href="remboursement-anticipe.html">Remboursement anticipé</a>
+        <a href="calcul-tva.html">TVA</a>
+        <a href="salaire-brut-net.html">Salaire net</a>
         <a href="credit-immobilier.html">Crédit immo</a>
         <a href="capacite-emprunt.html">Capacité emprunt</a>
         <a href="rendement-locatif.html">Rendement locatif</a>
-        <a href="interets-composes.html">Intérêts composés</a>
-        <a href="regle-72.html">Règle des 72</a>
-        <a href="epargne-mensuelle.html">Épargne</a>
-        <a href="inflation-pouvoir-achat.html">Inflation</a>
+        <a href="epargne-mensuelle.html">Épargne mensuelle</a>
         <a href="livret-a-vs-inflation.html">Livret A</a>
+        <a href="inflation-pouvoir-achat.html">Inflation</a>
+        <a href="regle-72.html">Règle des 72</a>
       </div>
       <p class="footer-copy">© 2026 L'Argent Expliqué — Tous droits réservés</p>
     </div>
   </footer>
+
+  <script>
+    // Email form: stub handler (no backend yet)
+    // TODO: replace with Formspree or Brevo integration
+    function handleEmailSubmit(e) {
+      e.preventDefault();
+      const email = e.target.querySelector('input[type="email"]').value;
+      if (email) {
+        document.getElementById("emailConfirm").style.display = "block";
+        e.target.querySelector('input[type="email"]').value = "";
+      }
+      return false;
+    }
+  </script>
 
 </body>
 </html>
