@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calcul salaire brut net France gratuit | L'Argent Expliqué</title>
+  <meta name="description" content="Convertissez votre salaire brut en net (ou net en brut) en France. Calcul instantané avec sélecteur cadre / non-cadre. Estimation simplifiée, résultat immédiat." />
+  <meta property="og:title" content="Calculateur salaire brut ↔ net France | L'Argent Expliqué" />
+  <meta property="og:description" content="Estimez votre salaire net à partir du brut (ou l'inverse) selon votre statut cadre ou non-cadre." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://itachiuchiha976.github.io/largent-calculateurs/salaire-brut-net.html" />
+  <link rel="canonical" href="https://itachiuchiha976.github.io/largent-calculateurs/salaire-brut-net.html" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculateur salaire brut net France",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "description": "Convertissez votre salaire brut en net ou net en brut en France selon votre statut cadre ou non-cadre.",
+    "inLanguage": "fr-FR",
+    "isAccessibleForFree": true,
+    "url": "https://itachiuchiha976.github.io/largent-calculateurs/salaire-brut-net.html"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="L'Argent Expliqué — Accueil calculateurs">
+        <span class="brand-name">💶 L'Argent Expliqué</span>
+        <span class="brand-sub">Calculateurs gratuits</span>
+      </a>
+      <a href="https://www.youtube.com/@tonargentexplique" class="header-cta" target="_blank" rel="noopener">
+        📺 La chaîne
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="container">
+
+      <nav class="breadcrumb" aria-label="Navigation">
+        <a href="index.html">Calculateurs</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Salaire brut / net</span>
+      </nav>
+
+      <!-- Calculator card -->
+      <div class="calc-card mt-sm">
+        <h1 class="calc-title">💼 Salaire brut ↔ net</h1>
+        <p class="calc-intro">
+          Entrez votre salaire mensuel brut (ou net) et sélectionnez votre statut pour obtenir une estimation rapide.
+          <em style="color:var(--text-muted); font-style:normal;">Estimation simplifiée — les vrais taux varient selon la convention collective, les avantages en nature et votre situation personnelle.</em>
+        </p>
+
+        <form id="calcForm" novalidate>
+
+          <!-- Statut cadre / non-cadre -->
+          <div class="form-group">
+            <label for="statut">Statut<span class="required">*</span></label>
+            <div class="select-wrap">
+              <select id="statut">
+                <option value="0.22">Non-cadre (~22 %)</option>
+                <option value="0.25">Cadre (~25 %)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Direction calcul -->
+          <div class="form-group">
+            <label for="direction">Sens du calcul<span class="required">*</span></label>
+            <div class="select-wrap">
+              <select id="direction">
+                <option value="brut-to-net">Brut → Net</option>
+                <option value="net-to-brut">Net → Brut</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="montant">Salaire mensuel<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="montant" value="2500" min="0" max="1000000" step="50" inputmode="decimal" aria-describedby="montantErr" />
+                <span class="input-unit">€</span>
+              </div>
+              <span class="input-error" id="montantErr" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="tauxPersonnalise">Taux personnalisé (opt.)</label>
+              <div class="input-wrap">
+                <input type="number" id="tauxPersonnalise" placeholder="ex: 23" min="1" max="50" step="0.1" inputmode="decimal" />
+                <span class="input-unit">%</span>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- Result -->
+        <div class="result-card" id="resultCard" aria-live="polite">
+          <div class="result-label" id="resLabel">Net mensuel estimé</div>
+          <div class="result-main" id="resMain">—</div>
+          <div class="result-sub" id="resSub"></div>
+          <div class="result-grid" style="margin-top:16px;">
+            <div class="result-item">
+              <div class="ri-label" id="labelA">Brut mensuel</div>
+              <div class="ri-value" id="resA">—</div>
+            </div>
+            <div class="result-item accent">
+              <div class="ri-label" id="labelB">Net mensuel</div>
+              <div class="ri-value" id="resB">—</div>
+            </div>
+            <div class="result-item">
+              <div class="ri-label">Brut annuel (×12)</div>
+              <div class="ri-value" id="resBrutAnnuel">—</div>
+            </div>
+            <div class="result-item accent">
+              <div class="ri-label">Net annuel (×12)</div>
+              <div class="ri-value" id="resNetAnnuel">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alert YMYL -->
+        <div class="alert alert-warn" style="margin-top:14px;">
+          <strong>⚠️ Estimation simplifiée</strong> — Les cotisations salariales réelles varient selon votre convention collective, votre ancienneté, vos avantages en nature et les tranches de la Sécurité Sociale. Pour un calcul précis, utilisez la fiche de paie de votre employeur ou un simulateur officiel (simulateur.gouv.fr).
+        </div>
+
+        <!-- Ad slot -->
+        <!-- AD_SLOT: rectangle 300x250 sous les résultats (à activer après trafic Google AdSense) -->
+        <div class="ad-placeholder"></div>
+
+      </div><!-- /calc-card -->
+
+      <!-- How it works -->
+      <div class="how-it-works">
+        <div class="how-title">📐 Comment ça marche</div>
+        <p>
+          En France, le salaire brut comprend les cotisations salariales (retraite, assurance maladie, chômage, etc.).
+          Le <strong style="color:var(--text)">salaire net</strong> est ce que vous recevez réellement sur votre compte bancaire après déduction de ces cotisations.
+        </p>
+        <p>
+          Le taux global de cotisations salariales est approximativement de <strong style="color:var(--text)">22 % pour un non-cadre</strong> et de <strong style="color:var(--text)">25 % pour un cadre</strong> (cotisation supplémentaire retraite complémentaire AGIRC).
+        </p>
+        <div class="formula-block">
+          Net ≈ Brut × (1 − taux_cotisations)<br>
+          Brut ≈ Net / (1 − taux_cotisations)
+        </div>
+        <p>
+          Exemple non-cadre : 2 500 € brut × (1 − 0,22) = <strong style="color:var(--accent)">1 950 € net/mois</strong> — soit 23 400 € net/an.
+        </p>
+        <p>
+          <em style="color:var(--text-muted)">Note : le prélèvement à la source (impôt sur le revenu) n'est pas inclus ici car il dépend de votre situation fiscale personnelle (foyer fiscal, déductions, etc.).</em>
+        </p>
+      </div>
+
+      <!-- CTA YouTube -->
+      <div class="mt-md">
+        <a href="https://www.youtube.com/@tonargentexplique" class="yt-cta" target="_blank" rel="noopener">
+          <span class="yt-cta-icon">📺</span>
+          <span>Comprendre ton argent en vidéo →</span>
+          <span class="yt-cta-arrow">›</span>
+        </a>
+      </div>
+
+      <!-- Related -->
+      <div class="related-links mt-md">
+        <div class="related-title">Autres calculateurs</div>
+        <ul class="related-list" aria-label="Liens vers d'autres calculateurs">
+          <li><a href="credit-immobilier.html">Mensualité crédit immobilier</a></li>
+          <li><a href="capacite-emprunt.html">Capacité d'emprunt (règle des 35 %)</a></li>
+          <li><a href="rendement-locatif.html">Rendement locatif brut et net</a></li>
+          <li><a href="interets-composes.html">Intérêts composés — faire fructifier son épargne</a></li>
+          <li><a href="epargne-mensuelle.html">Épargne mensuelle — quel capital atteindre ?</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-yt">
+        <a href="https://www.youtube.com/@tonargentexplique" target="_blank" rel="noopener">
+          📺 L'Argent Expliqué — La chaîne YouTube
+        </a>
+      </div>
+      <p class="footer-disclaimer">
+        <strong>⚠️ Contenu éducatif uniquement.</strong> Ces calculateurs ne constituent pas un conseil financier ou en investissement. Les taux utilisés sont des approximations pédagogiques et ne sont pas garantis. Les résultats produits sont des estimations simplifiées. Consultez un professionnel agréé (expert-comptable, conseiller en investissements financiers — CIF) pour toute décision financière personnelle.
+      </p>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="credit-immobilier.html">Crédit immo</a>
+        <a href="capacite-emprunt.html">Capacité emprunt</a>
+        <a href="rendement-locatif.html">Rendement locatif</a>
+        <a href="interets-composes.html">Intérêts composés</a>
+      </div>
+      <p class="footer-copy">© 2026 L'Argent Expliqué — Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script>
+  /* ---- Inline select styling ---- */
+  (function injectSelectStyle() {
+    const s = document.createElement("style");
+    s.textContent = `
+      .select-wrap { position: relative; }
+      .select-wrap select {
+        width: 100%;
+        background: var(--bg-input);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-sm);
+        color: var(--text);
+        font-family: var(--font);
+        font-size: 1.05rem;
+        padding: 12px 40px 12px 14px;
+        -webkit-appearance: none;
+        appearance: none;
+        outline: none;
+        transition: border-color 0.2s;
+        min-height: 48px;
+        cursor: pointer;
+      }
+      .select-wrap select:focus { border-color: var(--accent); }
+      .select-wrap::after {
+        content: "▾";
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        pointer-events: none;
+        font-size: 0.9rem;
+      }
+    `;
+    document.head.appendChild(s);
+  })();
+  </script>
+  <script>
+    (function () {
+      "use strict";
+
+      const elMontant   = document.getElementById("montant");
+      const elStatut    = document.getElementById("statut");
+      const elDirection = document.getElementById("direction");
+      const elTauxPerso = document.getElementById("tauxPersonnalise");
+      const elResMain   = document.getElementById("resMain");
+      const elResSub    = document.getElementById("resSub");
+      const elResLabel  = document.getElementById("resLabel");
+      const elResA      = document.getElementById("resA");
+      const elResB      = document.getElementById("resB");
+      const elLabelA    = document.getElementById("labelA");
+      const elLabelB    = document.getElementById("labelB");
+      const elBrutAnnuel = document.getElementById("resBrutAnnuel");
+      const elNetAnnuel  = document.getElementById("resNetAnnuel");
+
+      function compute() {
+        const montant = parseVal(elMontant.value);
+        const tauxPerso = parseVal(elTauxPerso.value);
+        const taux = isNaN(tauxPerso) || tauxPerso <= 0
+          ? parseFloat(elStatut.value)
+          : tauxPerso / 100;
+        const direction = elDirection.value;
+
+        const vM = validate(montant, "salaire", { min: 0, allowZero: false });
+        if (!vM.ok) {
+          showError(elMontant, vM.error);
+          return;
+        } else {
+          showError(elMontant, "");
+        }
+
+        let brut, net;
+        if (direction === "brut-to-net") {
+          brut = montant;
+          net  = brut * (1 - taux);
+          elResLabel.textContent = "Net mensuel estimé";
+          elResMain.textContent  = fmtEur(net);
+          elLabelA.textContent   = "Brut mensuel";
+          elLabelB.textContent   = "Net mensuel";
+        } else {
+          net  = montant;
+          brut = net / (1 - taux);
+          elResLabel.textContent = "Brut mensuel estimé";
+          elResMain.textContent  = fmtEur(brut);
+          elLabelA.textContent   = "Net mensuel";
+          elLabelB.textContent   = "Brut mensuel";
+        }
+
+        const tauxPct = Math.round(taux * 100);
+        elResSub.textContent  = `Taux de cotisations salariales appliqué : ${tauxPct} %`;
+        elResA.textContent    = fmtEur(direction === "brut-to-net" ? brut : net);
+        elResB.textContent    = fmtEur(direction === "brut-to-net" ? net : brut);
+        elBrutAnnuel.textContent = fmtEur(brut * 12);
+        elNetAnnuel.textContent  = fmtEur(net * 12);
+      }
+
+      [elMontant, elStatut, elDirection, elTauxPerso].forEach(el => {
+        el.addEventListener("input", compute);
+        el.addEventListener("change", compute);
+      });
+
+      compute();
+    })();
+  </script>
+
+</body>
+</html>
