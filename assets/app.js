@@ -473,3 +473,38 @@ window.addEventListener("resize", () => {
     _chartQueue.forEach(({ canvas, drawFn }) => drawFn(canvas));
   }, 120);
 });
+
+/* ---- Email capture (Web3Forms, AJAX) ---- */
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("form.lae-email-form").forEach(function (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var wrap = form.parentElement;
+      var btn = form.querySelector('button[type="submit"]');
+      var successEl = wrap.querySelector(".lae-email-success");
+      var errorEl = wrap.querySelector(".lae-email-error");
+      if (errorEl) errorEl.style.display = "none";
+      var origLabel = btn ? btn.textContent : "";
+      if (btn) { btn.disabled = true; btn.textContent = "Envoi…"; }
+
+      fetch(form.action, {
+        method: "POST",
+        headers: { "Accept": "application/json" },
+        body: new FormData(form)
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (json) {
+          if (json && json.success) {
+            form.style.display = "none";
+            if (successEl) successEl.style.display = "block";
+          } else {
+            throw new Error((json && json.message) || "error");
+          }
+        })
+        .catch(function () {
+          if (btn) { btn.disabled = false; btn.textContent = origLabel; }
+          if (errorEl) errorEl.style.display = "block";
+        });
+    });
+  });
+});

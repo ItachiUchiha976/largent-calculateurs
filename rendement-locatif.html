@@ -178,11 +178,33 @@
         </p>
       </div>
 
+      <!-- Email capture -->
+      <div class="email-capture mt-md">
+        <div class="email-capture-title">📥 Guide gratuit : les 5 erreurs qui coûtent cher en épargne</div>
+        <p class="email-capture-sub">
+          Laisse ton email : accès immédiat au guide + les nouveaux calculateurs et repères finances perso. Gratuit, sans spam.
+        </p>
+        <form class="email-form lae-email-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="d97a8c73-b827-48bb-b437-e053a73fdb7e">
+          <input type="hidden" name="subject" value="L'Argent Calculateurs — lead (rendement locatif)">
+          <input type="hidden" name="from_name" value="L'Argent Calculateurs">
+          <input type="checkbox" name="botcheck" style="display:none !important" tabindex="-1" autocomplete="off">
+          <input type="email" name="email" placeholder="ton@email.fr" autocomplete="email" required aria-label="Adresse email" />
+          <button type="submit">Recevoir le guide →</button>
+        </form>
+        <p class="email-note">📌 Pas de spam. Désinscription en 1 clic. Voir la <a href="confidentialite.html">politique de confidentialité</a>.</p>
+        <div class="lae-email-error" style="display:none;">Une erreur est survenue. Réessaie dans un instant.</div>
+        <div class="lae-email-success" style="display:none;">
+          ✔ Merci ! Tu es sur la liste.
+          <br><a class="lae-guide-link" href="guides/5-erreurs-epargne.html" target="_blank" rel="noopener">📖 Accéder au guide maintenant →</a>
+        </div>
+      </div>
+
       <!-- CTA YouTube -->
       <div class="mt-md">
         <a href="https://www.youtube.com/@tonargentexplique" class="yt-cta" target="_blank" rel="noopener">
           <span class="yt-cta-icon">📺</span>
-          <span>Comprendre ton argent en vidéo →</span>
+          <span>Investissement locatif : calculer la vraie rentabilité →</span>
           <span class="yt-cta-arrow">›</span>
         </a>
       </div>
@@ -220,7 +242,10 @@
         <a href="salaire-brut-net.html">Salaire brut/net</a>
         <a href="interets-composes.html">Intérêts composés</a>
       </div>
-      <p class="footer-copy">© 2026 L'Argent Expliqué — Tous droits réservés</p>
+      <p class="footer-copy">
+        <a href="confidentialite.html" style="color:var(--text-muted);text-decoration:underline;">Politique de confidentialité</a>
+        &nbsp;·&nbsp; © 2026 L'Argent Expliqué — Tous droits réservés
+      </p>
     </div>
   </footer>
 
