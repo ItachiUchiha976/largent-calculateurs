@@ -496,7 +496,20 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(function (json) {
           if (json && json.success) {
             form.style.display = "none";
-            if (successEl) successEl.style.display = "block";
+            if (successEl) {
+              successEl.style.display = "block";
+              // 2e ligne sous le guide gratuit : pousser vers l'offre payante (pic d'intention)
+              if (!successEl.querySelector(".lae-pack-link")) {
+                var packLink = document.createElement("a");
+                packLink.className = "lae-pack-link";
+                packLink.href = "https://boutiquefred.gumroad.com/l/pack-maitre-budget";
+                packLink.target = "_blank";
+                packLink.rel = "noopener";
+                packLink.textContent = "Prêt à passer à l'action ? → Pack Maître du Budget (12€)";
+                successEl.appendChild(document.createElement("br"));
+                successEl.appendChild(packLink);
+              }
+            }
           } else {
             throw new Error((json && json.message) || "error");
           }
