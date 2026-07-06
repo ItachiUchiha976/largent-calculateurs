@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calcul capacité d'emprunt immobilier (règle des 35%) | L'Argent Expliqué</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💶</text></svg>">
+  <meta name="description" content="Estimez votre capacité d'emprunt immobilier selon la règle des 35 % du HCSF. Entrez vos revenus nets, le taux et la durée. Résultat instantané, gratuit." />
+  <meta property="og:title" content="Calculateur capacité d'emprunt immobilier | L'Argent Expliqué" />
+  <meta property="og:description" content="Combien pouvez-vous emprunter ? Calcul selon la règle des 35 % du HCSF. Résultat immédiat." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://tonargentexplique.fr/assets/img/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:url" content="https://tonargentexplique.fr/capacite-emprunt.html" />
+  <link rel="canonical" href="https://tonargentexplique.fr/capacite-emprunt.html" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculateur capacité d'emprunt immobilier",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "description": "Estimez votre capacité d'emprunt immobilier selon la règle des 35 % du HCSF (taux d'endettement maximum).",
+    "inLanguage": "fr-FR",
+    "isAccessibleForFree": true,
+    "url": "https://tonargentexplique.fr/capacite-emprunt.html"
+  }
+  </script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="d0fa94fe-a108-4590-a465-8f0017569370"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="L'Argent Expliqué — Accueil calculateurs">
+        <span class="brand-name">💶 L'Argent Expliqué</span>
+        <span class="brand-sub">Calculateurs gratuits</span>
+      </a>
+      <a href="https://www.youtube.com/@tonargentexplique" class="header-cta" target="_blank" rel="noopener">
+        📺 La chaîne
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="container">
+
+      <nav class="breadcrumb" aria-label="Navigation">
+        <a href="index.html">Calculateurs</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Capacité d'emprunt</span>
+      </nav>
+
+      <!-- Calculator card -->
+      <div class="calc-card mt-sm">
+        <h1 class="calc-title">📊 Capacité d'emprunt</h1>
+        <p class="calc-intro">
+          Entrez vos revenus nets mensuels du foyer (salaires + autres revenus stables) et vos charges actuelles pour estimer combien vous pouvez emprunter.
+          <em style="color:var(--text-muted); font-style:normal;">Basé sur la règle des 35 % du HCSF (taux d'endettement maximum réglementé depuis 2022).</em>
+        </p>
+
+        <form id="calcForm" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="revenus">Revenus nets mensuels<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="revenus" value="3500" min="100" max="1000000" step="100" inputmode="decimal" aria-describedby="revenusErr" />
+                <span class="input-unit">€</span>
+              </div>
+              <span class="input-error" id="revenusErr" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="charges">Charges mensuelles actuelles</label>
+              <div class="input-wrap">
+                <input type="number" id="charges" value="0" min="0" max="100000" step="50" inputmode="decimal" />
+                <span class="input-unit">€</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="taux">Taux annuel du prêt<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="taux" value="3.5" min="0.1" max="30" step="0.05" inputmode="decimal" aria-describedby="tauxErr" />
+                <span class="input-unit">%</span>
+              </div>
+              <span class="input-error" id="tauxErr" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="duree">Durée du prêt<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="duree" value="25" min="1" max="30" step="1" inputmode="decimal" aria-describedby="dureeErr" />
+                <span class="input-unit">ans</span>
+              </div>
+              <span class="input-error" id="dureeErr" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tauxEndettement">Taux d'endettement max</label>
+              <div class="input-wrap">
+                <input type="number" id="tauxEndettement" value="35" min="10" max="50" step="1" inputmode="decimal" />
+                <span class="input-unit">%</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="apport">Apport personnel</label>
+              <div class="input-wrap">
+                <input type="number" id="apport" value="0" min="0" max="10000000" step="1000" inputmode="decimal" />
+                <span class="input-unit">€</span>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- Result -->
+        <div class="result-card" id="resultCard" aria-live="polite">
+          <div class="result-label">Capital empruntable estimé</div>
+          <div class="result-main" id="resCapital">—</div>
+          <div class="result-sub" id="resSub"></div>
+          <div class="result-grid" style="margin-top:16px;">
+            <div class="result-item">
+              <div class="ri-label">Mensualité max</div>
+              <div class="ri-value" id="resMensualiteMax">—</div>
+            </div>
+            <div class="result-item accent">
+              <div class="ri-label">Capacité (+ apport)</div>
+              <div class="ri-value" id="resBudgetTotal">—</div>
+            </div>
+            <div class="result-item warn">
+              <div class="ri-label">Taux d'endettement réel</div>
+              <div class="ri-value" id="resTauxReel">—</div>
+            </div>
+            <div class="result-item">
+              <div class="ri-label">Reste à vivre / mois</div>
+              <div class="ri-value" id="resRAV">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alert YMYL -->
+        <div class="alert alert-warn" style="margin-top:14px;">
+          <strong>⚠️ Estimation indicative</strong> — Les banques appliquent des critères supplémentaires (apport minimum, type de contrat, stabilité des revenus, âge, assurance emprunteur). Ce calcul est basé sur la règle des 35 % du HCSF mais ne tient pas compte de l'assurance ADI.
+        </div>
+
+        <!-- Guide link -->
+        <div class="alert alert-info" style="margin-top:10px; font-size:0.84rem;">
+          📖 <a href="guides/regle-35-pourcent-endettement.html" style="color:var(--accent);">Comprendre la règle des 35 % d'endettement →</a>
+        </div>
+
+        <!-- Ad slot -->
+        <!-- AD_SLOT: rectangle 300x250 sous les résultats (à activer après trafic Google AdSense) -->
+        <div class="ad-placeholder"></div>
+
+      </div><!-- /calc-card -->
+
+      <!-- How it works -->
+      <div class="how-it-works">
+        <div class="how-title">📐 Comment ça marche</div>
+        <p>
+          Depuis janvier 2022, le <strong style="color:var(--text)">HCSF (Haut Conseil de Stabilité Financière)</strong> impose aux banques françaises un taux d'endettement maximal de <strong style="color:var(--text)">35 %</strong> des revenus nets (assurance emprunteur incluse).
+        </p>
+        <div class="formula-block">
+          Mensualité max = Revenus_nets × taux_endettement_max<br>
+          t = taux_annuel / 12<br>
+          n = durée_en_années × 12<br>
+          Capital = M_max × (1 − (1 + t)^(−n)) / t
+        </div>
+        <p>
+          <strong style="color:var(--text)">Exemple :</strong> 3 500 € nets/mois, 3,5 % sur 25 ans, 35 % d'endettement :
+          M_max = 1 225 € — Capital ≈ <strong style="color:var(--accent)">244 700 €</strong>.
+        </p>
+        <p>
+          <em style="color:var(--text-muted)">Le reste à vivre (revenus − mensualité − charges) est un indicateur de confort financier. Les banques regardent aussi ce ratio.</em>
+        </p>
+      </div>
+
+      <!-- Email capture -->
+      <div class="email-capture mt-md">
+        <div class="email-capture-title">📥 Guide gratuit : les 5 erreurs qui coûtent cher en épargne</div>
+        <p class="email-capture-sub">
+          Laisse ton email : accès immédiat au guide + les nouveaux calculateurs et repères finances perso. Gratuit, sans spam.
+        </p>
+        <form class="email-form lae-email-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="d97a8c73-b827-48bb-b437-e053a73fdb7e">
+          <input type="hidden" name="subject" value="L'Argent Calculateurs — lead (capacité d'emprunt)">
+          <input type="hidden" name="from_name" value="L'Argent Calculateurs">
+          <input type="checkbox" name="botcheck" style="display:none !important" tabindex="-1" autocomplete="off">
+          <input type="email" name="email" placeholder="ton@email.fr" autocomplete="email" required aria-label="Adresse email" />
+          <button type="submit">Recevoir le guide →</button>
+        </form>
+        <p class="email-note">📌 Pas de spam. Désinscription en 1 clic. Voir la <a href="confidentialite.html">politique de confidentialité</a>.</p>
+        <div class="lae-email-error" style="display:none;">Une erreur est survenue. Réessaie dans un instant.</div>
+        <div class="lae-email-success" style="display:none;">
+          ✔ Merci ! Tu es sur la liste.
+          <br><a class="lae-guide-link" href="guides/5-erreurs-epargne.html" target="_blank" rel="noopener">📖 Accéder au guide maintenant →</a>
+        </div>
+      </div>
+
+      <!-- CTA YouTube -->
+      <div class="mt-md">
+        <a href="https://www.youtube.com/@tonargentexplique" class="yt-cta" target="_blank" rel="noopener">
+          <span class="yt-cta-icon">📺</span>
+          <span>Combien peux-tu emprunter ? On décortique →</span>
+          <span class="yt-cta-arrow">›</span>
+        </a>
+      </div>
+
+      <!-- Related -->
+      <div class="related-links mt-md">
+        <div class="related-title">Autres calculateurs</div>
+        <ul class="related-list" aria-label="Liens vers d'autres calculateurs">
+          <li><a href="credit-immobilier.html">Mensualité crédit immobilier — calcul détaillé</a></li>
+          <li><a href="rendement-locatif.html">Rendement locatif brut et net</a></li>
+          <li><a href="salaire-brut-net.html">Salaire brut ↔ net France</a></li>
+          <li><a href="epargne-mensuelle.html">Épargne mensuelle — quel capital atteindre ?</a></li>
+          <li><a href="interets-composes.html">Intérêts composés — faire fructifier son épargne</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-yt">
+        <a href="https://www.youtube.com/@tonargentexplique" target="_blank" rel="noopener">
+          📺 L'Argent Expliqué — La chaîne YouTube
+        </a>
+      </div>
+      <p class="footer-disclaimer">
+        <strong>⚠️ Contenu éducatif uniquement.</strong> Ces calculateurs ne constituent pas un conseil financier ou en investissement. La capacité d'emprunt réelle dépend de nombreux critères évalués par chaque banque. Consultez un courtier ou un conseiller bancaire agréé pour toute décision de financement immobilier.
+      </p>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="credit-immobilier.html">Crédit immo</a>
+        <a href="rendement-locatif.html">Rendement locatif</a>
+        <a href="salaire-brut-net.html">Salaire brut/net</a>
+        <a href="interets-composes.html">Intérêts composés</a>
+      </div>
+      <p class="footer-copy">
+        <a href="confidentialite.html" style="color:var(--text-muted);text-decoration:underline;">Politique de confidentialité</a>
+        &nbsp;·&nbsp; © 2026 L'Argent Expliqué — Tous droits réservés
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const elRevenus   = document.getElementById("revenus");
+      const elCharges   = document.getElementById("charges");
+      const elTaux      = document.getElementById("taux");
+      const elDuree     = document.getElementById("duree");
+      const elTauxEndet = document.getElementById("tauxEndettement");
+      const elApport    = document.getElementById("apport");
+
+      const elResCapital      = document.getElementById("resCapital");
+      const elResSub          = document.getElementById("resSub");
+      const elMensualiteMax   = document.getElementById("resMensualiteMax");
+      const elBudgetTotal     = document.getElementById("resBudgetTotal");
+      const elTauxReel        = document.getElementById("resTauxReel");
+      const elRAV             = document.getElementById("resRAV");
+      const elResultCard      = document.getElementById("resultCard");
+
+      function computeCapital(M, r, nMois) {
+        if (nMois <= 0) return 0;
+        const t = r / 12;
+        if (t === 0) return M * nMois;
+        return M * (1 - Math.pow(1 + t, -nMois)) / t;
+      }
+
+      function compute() {
+        const revenus  = parseVal(elRevenus.value);
+        const charges  = parseVal(elCharges.value) || 0;
+        const r        = parseVal(elTaux.value) / 100;
+        const duree    = parseVal(elDuree.value);
+        const txEnd    = parseVal(elTauxEndet.value) / 100;
+        const apport   = parseVal(elApport.value) || 0;
+
+        let hasError = false;
+
+        const vR = validate(revenus, "revenus", { min: 100, allowZero: false });
+        if (!vR.ok) { showError(elRevenus, vR.error); hasError = true; }
+        else showError(elRevenus, "");
+
+        const vT = validate(r * 100, "taux", { min: 0.1, max: 30, allowZero: false });
+        if (!vT.ok) { showError(elTaux, vT.error); hasError = true; }
+        else showError(elTaux, "");
+
+        const vD = validate(duree, "durée", { min: 1, max: 30, allowZero: false });
+        if (!vD.ok) { showError(elDuree, vD.error); hasError = true; }
+        else showError(elDuree, "");
+
+        if (hasError) { if (elResultCard) elResultCard.classList.add("is-stale"); return; }
+        if (elResultCard) elResultCard.classList.remove("is-stale");
+
+        const nMois = Math.round(duree * 12);
+        const mensualiteMax = revenus * txEnd - charges;
+
+        if (mensualiteMax <= 0) {
+          elResCapital.textContent = "0 €";
+          elResSub.textContent = "Les charges actuelles dépassent la limite d'endettement.";
+          elMensualiteMax.textContent = fmtEur(0);
+          elBudgetTotal.textContent   = fmtEur(apport);
+          elTauxReel.textContent      = fmtNum(txEnd * 100, 0) + " %";
+          elRAV.textContent           = fmtEur(revenus - charges);
+          return;
+        }
+
+        const capital = computeCapital(mensualiteMax, r, nMois);
+        const budgetTotal = capital + apport;
+        const tauxReel = (mensualiteMax + charges) / revenus * 100;
+        const rav = revenus - mensualiteMax - charges;
+
+        elResCapital.textContent    = fmtEur(capital);
+        elResSub.textContent        = `Mensualité max ${fmtEur(mensualiteMax)} · taux ${fmtNum(r * 100, 2)} % · ${duree} an${duree > 1 ? "s" : ""}`;
+        elMensualiteMax.textContent = fmtEur(mensualiteMax);
+        elBudgetTotal.textContent   = fmtEur(budgetTotal);
+        elTauxReel.textContent      = fmtNum(tauxReel, 1) + " %";
+        elRAV.textContent           = fmtEur(rav);
+      }
+
+      [elRevenus, elCharges, elTaux, elDuree, elTauxEndet, elApport].forEach(el => {
+        el.addEventListener("input", compute);
+        el.addEventListener("change", compute);
+      });
+
+      compute();
+    })();
+  </script>
+</body>
+</html>

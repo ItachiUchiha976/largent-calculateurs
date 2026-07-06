@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Règle des 72 — Calculateur en ligne gratuit | L'Argent Expliqué</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💶</text></svg>">
+  <meta name="description" content="Utilisez la règle des 72 pour estimer en quelques secondes combien d'années il faut pour doubler votre capital. Tableau comparatif et explication pédagogique." />
+  <meta property="og:title" content="Règle des 72 — Calculateur en ligne | L'Argent Expliqué" />
+  <meta property="og:description" content="Divisez 72 par votre taux annuel pour savoir en combien d'années votre capital double. Résultat instantané." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://tonargentexplique.fr/assets/img/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://tonargentexplique.fr/regle-72.html" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Qu'est-ce que la règle des 72 ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La règle des 72 est une approximation qui permet d'estimer le nombre d'années nécessaires pour doubler un capital à un taux de rendement annuel donné, en divisant 72 par ce taux. Par exemple, à 6 % par an, il faut environ 72/6 = 12 ans."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quelle est la formule exacte pour calculer le doublement d'un capital ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La formule exacte utilise le logarithme naturel : t = ln(2) / ln(1 + r), où r est le taux annuel en décimal. La règle des 72 est une excellente approximation pour des taux entre 1 % et 20 %."
+        }
+      }
+    ]
+  }
+  </script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="d0fa94fe-a108-4590-a465-8f0017569370"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="L'Argent Expliqué — Accueil calculateurs">
+        <span class="brand-name">💶 L'Argent Expliqué</span>
+        <span class="brand-sub">Calculateurs gratuits</span>
+      </a>
+      <a href="https://www.youtube.com/@tonargentexplique" class="header-cta" target="_blank" rel="noopener">
+        📺 La chaîne
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="container">
+
+      <nav class="breadcrumb" aria-label="Navigation">
+        <a href="index.html">Calculateurs</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Règle des 72</span>
+      </nav>
+
+      <!-- Calculator card -->
+      <div class="calc-card mt-sm">
+        <h1 class="calc-title">⚡ Règle des 72</h1>
+        <p class="calc-intro">
+          Entrez un taux de rendement annuel hypothétique pour savoir <strong style="color:var(--text)">en combien d'années votre capital double</strong>.
+          La règle des 72 est une astuce mentale rapide — l'outil affiche aussi le temps exact.
+        </p>
+
+        <form id="calcForm" novalidate>
+          <div class="form-group" style="max-width:280px;">
+            <label for="taux">Taux de rendement annuel<span class="required">*</span></label>
+            <div class="input-wrap">
+              <input type="number" id="taux" value="6" min="0.1" max="100" step="0.1" inputmode="decimal" aria-describedby="tauxErr" />
+              <span class="input-unit">%</span>
+            </div>
+            <span class="input-error" id="tauxErr" role="alert"></span>
+          </div>
+        </form>
+
+        <!-- Result -->
+        <div class="result-card" id="resultCard" aria-live="polite">
+          <div class="result-label">Années pour doubler (règle des 72)</div>
+          <div class="result-main" id="resApprox">—</div>
+          <div class="result-sub" id="resSub"></div>
+          <div class="result-grid" style="margin-top:16px;">
+            <div class="result-item">
+              <div class="ri-label">Résultat approché (72/r)</div>
+              <div class="ri-value" id="resR72">—</div>
+            </div>
+            <div class="result-item accent">
+              <div class="ri-label">Résultat exact (ln2/ln(1+r))</div>
+              <div class="ri-value" id="resExact">—</div>
+            </div>
+            <div class="result-item">
+              <div class="ri-label">Écart (règle vs exact)</div>
+              <div class="ri-value" id="resGap">—</div>
+            </div>
+            <div class="result-item warn">
+              <div class="ri-label">À ce taux, 1 000 € deviennent</div>
+              <div class="ri-value" id="resDouble">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ad slot -->
+        <!-- AD_SLOT: rectangle 300x250 sous les résultats (à activer après trafic Google AdSense) -->
+        <div class="ad-placeholder"></div>
+
+        <!-- Comparison table -->
+        <div class="calc-card" style="margin-top:20px; padding: 16px;">
+          <div class="how-title" style="margin-bottom:12px;">📊 Tableau comparatif (taux courants)</div>
+          <table class="data-table" aria-label="Tableau de doublement par taux">
+            <thead>
+              <tr>
+                <th>Taux annuel</th>
+                <th>Règle des 72</th>
+                <th>Valeur exacte</th>
+                <th>Exemple</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /calc-card -->
+
+      <!-- How it works -->
+      <div class="how-it-works">
+        <div class="how-title">📐 Comment ça marche</div>
+        <p>
+          La <strong style="color:var(--text)">règle des 72</strong> est une approximation mathématique pratique : pour estimer le doublement d'un capital,
+          on divise simplement 72 par le taux de rendement annuel en pourcentage.
+        </p>
+        <div class="formula-block">
+          Années ≈ 72 / taux (%)
+        </div>
+        <p>
+          La formule <strong style="color:var(--text)">exacte</strong>, elle, utilise le logarithme naturel :
+        </p>
+        <div class="formula-block">
+          Années = ln(2) / ln(1 + r) ≈ 0,6931 / ln(1 + r)
+        </div>
+        <p>
+          La règle des 72 est très précise entre 1 % et 20 %. Elle légèrement surestime à bas taux et sous-estime à très hauts taux.
+          Elle a l'avantage de se calculer de tête en quelques secondes.
+        </p>
+      </div>
+
+      <!-- Email capture -->
+      <div class="email-capture mt-md">
+        <div class="email-capture-title">📥 Guide gratuit : les 5 erreurs qui coûtent cher en épargne</div>
+        <p class="email-capture-sub">
+          Laisse ton email : accès immédiat au guide + les nouveaux calculateurs et repères finances perso. Gratuit, sans spam.
+        </p>
+        <form class="email-form lae-email-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="d97a8c73-b827-48bb-b437-e053a73fdb7e">
+          <input type="hidden" name="subject" value="L'Argent Calculateurs — lead (règle des 72)">
+          <input type="hidden" name="from_name" value="L'Argent Calculateurs">
+          <input type="checkbox" name="botcheck" style="display:none !important" tabindex="-1" autocomplete="off">
+          <input type="email" name="email" placeholder="ton@email.fr" autocomplete="email" required aria-label="Adresse email" />
+          <button type="submit">Recevoir le guide →</button>
+        </form>
+        <p class="email-note">📌 Pas de spam. Désinscription en 1 clic. Voir la <a href="confidentialite.html">politique de confidentialité</a>.</p>
+        <div class="lae-email-error" style="display:none;">Une erreur est survenue. Réessaie dans un instant.</div>
+        <div class="lae-email-success" style="display:none;">
+          ✔ Merci ! Tu es sur la liste.
+          <br><a class="lae-guide-link" href="guides/5-erreurs-epargne.html" target="_blank" rel="noopener">📖 Accéder au guide maintenant →</a>
+        </div>
+      </div>
+
+      <!-- Cross-sell comparateur IA -->
+      <div class="partner-cta mt-md">
+        <a href="https://technovaboutique.fr/comparateur/" target="_blank" rel="noopener">
+          <span class="partner-cta-icon">🤖</span>
+          <span class="partner-cta-text">
+            <strong>Comparer les outils pour placer ton argent</strong>
+            Compare les meilleurs outils IA pour gérer tes finances →
+          </span>
+          <span class="yt-cta-arrow">›</span>
+        </a>
+        <p class="partner-note">Outil gratuit du même éditeur — contient des liens partenaires.</p>
+      </div>
+
+      <!-- CTA YouTube -->
+      <div class="mt-md">
+        <a href="https://www.youtube.com/@tonargentexplique" class="yt-cta" target="_blank" rel="noopener">
+          <span class="yt-cta-icon">📺</span>
+          <span>La règle des 72 expliquée simplement en vidéo →</span>
+          <span class="yt-cta-arrow">›</span>
+        </a>
+      </div>
+
+      <!-- Related -->
+      <div class="related-links mt-md">
+        <div class="related-title">Autres calculateurs</div>
+        <ul class="related-list" aria-label="Liens vers d'autres calculateurs">
+          <li><a href="interets-composes.html">Intérêts composés — simuler votre croissance</a></li>
+          <li><a href="epargne-mensuelle.html">Épargne mensuelle — quel capital atteindre ?</a></li>
+          <li><a href="inflation-pouvoir-achat.html">Inflation — érosion du pouvoir d'achat</a></li>
+          <li><a href="livret-a-vs-inflation.html">Livret A vs Inflation — rendement réel</a></li>
+          <li><a href="credit-immobilier.html">Mensualité crédit immobilier</a></li>
+          <li><a href="capacite-emprunt.html">Capacité d'emprunt (règle des 35 %)</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-yt">
+        <a href="https://www.youtube.com/@tonargentexplique" target="_blank" rel="noopener">
+          📺 L'Argent Expliqué — La chaîne YouTube
+        </a>
+      </div>
+      <p class="footer-disclaimer">
+        <strong>⚠️ Contenu éducatif uniquement.</strong> Ces calculateurs ne constituent pas un conseil financier ou en investissement. Les rendements utilisés sont illustratifs et ne sont pas garantis. Consultez un professionnel agréé pour toute décision.
+      </p>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="credit-immobilier.html">Crédit immo</a>
+        <a href="interets-composes.html">Intérêts composés</a>
+        <a href="epargne-mensuelle.html">Épargne</a>
+        <a href="inflation-pouvoir-achat.html">Inflation</a>
+      </div>
+      <p class="footer-copy">
+        <a href="confidentialite.html" style="color:var(--text-muted);text-decoration:underline;">Politique de confidentialité</a>
+        &nbsp;·&nbsp; © 2026 L'Argent Expliqué — Tous droits réservés
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const elTaux   = document.getElementById("taux");
+      const elApprox = document.getElementById("resApprox");
+      const elSub    = document.getElementById("resSub");
+      const elR72    = document.getElementById("resR72");
+      const elExact  = document.getElementById("resExact");
+      const elGap    = document.getElementById("resGap");
+      const elDouble = document.getElementById("resDouble");
+      const tableBody = document.getElementById("tableBody");
+
+      // Comparison taux list
+      const RATES = [2, 4, 6, 8, 10, 12];
+
+      function buildTable() {
+        tableBody.innerHTML = "";
+        RATES.forEach(pct => {
+          const r = pct / 100;
+          const approx = rule72(r);
+          const exact  = exactDoubleTime(r);
+          const tr = document.createElement("tr");
+          tr.innerHTML =
+            `<td>${pct} %</td>` +
+            `<td>${fmtNum(approx, 1)} ans</td>` +
+            `<td class="td-accent">${fmtNum(exact, 2)} ans</td>` +
+            `<td>1 000 € → 2 000 € en ~${fmtNum(approx, 0)} ans</td>`;
+          tableBody.appendChild(tr);
+        });
+      }
+
+      function compute() {
+        const pct = parseVal(elTaux.value);
+        const v = validate(pct, "taux", { min: 0.1, max: 100, allowZero: false });
+        if (!v.ok) { showError(elTaux, v.error); return; }
+        showError(elTaux, "");
+
+        const r      = pct / 100;
+        const approx = rule72(r);
+        const exact  = exactDoubleTime(r);
+        const gap    = Math.abs(approx - exact);
+
+        elApprox.textContent = fmtNum(approx, 1) + " ans";
+        elSub.textContent    = `À ${fmtNum(pct, 2)} % par an, votre capital double en environ ${fmtNum(approx, 1)} ans.`;
+        elR72.textContent    = fmtNum(approx, 2) + " ans";
+        elExact.textContent  = fmtNum(exact, 2) + " ans";
+        elGap.textContent    = fmtNum(gap, 2) + " ans";
+        elDouble.textContent = fmtEur(2000);
+      }
+
+      elTaux.addEventListener("input", compute);
+      elTaux.addEventListener("change", compute);
+
+      buildTable();
+      compute();
+    })();
+  </script>
+</body>
+</html>

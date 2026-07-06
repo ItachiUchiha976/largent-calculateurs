@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calcul rendement locatif brut et net gratuit | L'Argent Expliqué</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💶</text></svg>">
+  <meta name="description" content="Calculez le rendement locatif brut et net de votre investissement immobilier. Entrez le prix, le loyer, les charges et la taxe foncière. Résultat immédiat." />
+  <meta property="og:title" content="Calculateur rendement locatif brut et net | L'Argent Expliqué" />
+  <meta property="og:description" content="Évaluez la rentabilité de votre investissement locatif : rendement brut et net estimé en quelques secondes." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://tonargentexplique.fr/assets/img/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:url" content="https://tonargentexplique.fr/rendement-locatif.html" />
+  <link rel="canonical" href="https://tonargentexplique.fr/rendement-locatif.html" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculateur rendement locatif brut et net",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "description": "Calculez le rendement locatif brut et net de votre investissement immobilier locatif en France.",
+    "inLanguage": "fr-FR",
+    "isAccessibleForFree": true,
+    "url": "https://tonargentexplique.fr/rendement-locatif.html"
+  }
+  </script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="d0fa94fe-a108-4590-a465-8f0017569370"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="L'Argent Expliqué — Accueil calculateurs">
+        <span class="brand-name">💶 L'Argent Expliqué</span>
+        <span class="brand-sub">Calculateurs gratuits</span>
+      </a>
+      <a href="https://www.youtube.com/@tonargentexplique" class="header-cta" target="_blank" rel="noopener">
+        📺 La chaîne
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="container">
+
+      <nav class="breadcrumb" aria-label="Navigation">
+        <a href="index.html">Calculateurs</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Rendement locatif</span>
+      </nav>
+
+      <!-- Calculator card -->
+      <div class="calc-card mt-sm">
+        <h1 class="calc-title">🏘️ Rendement locatif</h1>
+        <p class="calc-intro">
+          Calculez le rendement brut et net de votre investissement locatif.
+          <em style="color:var(--text-muted); font-style:normal;">Estimation simplifiée — hors fiscalité sur les revenus fonciers, vacance locative et travaux imprévus.</em>
+        </p>
+
+        <form id="calcForm" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prixAchat">Prix d'achat<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="prixAchat" value="150000" min="1000" max="100000000" step="1000" inputmode="decimal" aria-describedby="prixErr" />
+                <span class="input-unit">€</span>
+              </div>
+              <span class="input-error" id="prixErr" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="fraisNotaire">Frais de notaire (~8 %)</label>
+              <div class="input-wrap">
+                <input type="number" id="fraisNotaire" value="12000" min="0" max="5000000" step="500" inputmode="decimal" />
+                <span class="input-unit">€</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="loyerMensuel">Loyer mensuel<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="loyerMensuel" value="700" min="1" max="100000" step="50" inputmode="decimal" aria-describedby="loyerErr" />
+                <span class="input-unit">€</span>
+              </div>
+              <span class="input-error" id="loyerErr" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="tauxVacance">Vacance locative</label>
+              <div class="input-wrap">
+                <input type="number" id="tauxVacance" value="0" min="0" max="100" step="1" inputmode="decimal" />
+                <span class="input-unit">%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="chargesAnnuelles">Charges annuelles</label>
+              <div class="input-wrap">
+                <input type="number" id="chargesAnnuelles" value="600" min="0" max="500000" step="100" inputmode="decimal" />
+                <span class="input-unit">€</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="taxeFonciere">Taxe foncière</label>
+              <div class="input-wrap">
+                <input type="number" id="taxeFonciere" value="800" min="0" max="100000" step="50" inputmode="decimal" />
+                <span class="input-unit">€</span>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- Result -->
+        <div class="result-card" id="resultCard" aria-live="polite">
+          <div class="result-label">Rendement locatif net estimé</div>
+          <div class="result-main" id="resRendNet">—</div>
+          <div class="result-sub" id="resSub"></div>
+          <div class="result-grid" style="margin-top:16px;">
+            <div class="result-item accent">
+              <div class="ri-label">Rendement brut</div>
+              <div class="ri-value" id="resRendBrut">—</div>
+            </div>
+            <div class="result-item accent">
+              <div class="ri-label">Rendement net</div>
+              <div class="ri-value" id="resRendNetB">—</div>
+            </div>
+            <div class="result-item">
+              <div class="ri-label">Loyers annuels perçus</div>
+              <div class="ri-value" id="resLoyersAnnuels">—</div>
+            </div>
+            <div class="result-item warn">
+              <div class="ri-label">Charges totales / an</div>
+              <div class="ri-value" id="resChargesTotal">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rating bar -->
+        <div id="ratingBlock" style="margin-top:14px; display:none;">
+          <div id="ratingAlert" class="alert"></div>
+        </div>
+
+        <!-- Alert YMYL -->
+        <div class="alert alert-warn" style="margin-top:14px;">
+          <strong>⚠️ Estimation simplifiée</strong> — Ce calcul ne tient pas compte de la fiscalité sur les revenus fonciers (IR + prélèvements sociaux), des frais de gestion locative (~7-10 %), des travaux imprévus, ni du coût du crédit si le bien est financé à crédit. Le rendement réel après impôts peut être significativement inférieur.
+        </div>
+
+        <!-- Ad slot -->
+        <!-- AD_SLOT: rectangle 300x250 sous les résultats (à activer après trafic Google AdSense) -->
+        <div class="ad-placeholder"></div>
+
+      </div><!-- /calc-card -->
+
+      <!-- How it works -->
+      <div class="how-it-works">
+        <div class="how-title">📐 Comment ça marche</div>
+        <p>
+          Le <strong style="color:var(--text)">rendement brut</strong> mesure le rapport entre les loyers annuels et le prix d'achat seul.
+          Le <strong style="color:var(--text)">rendement net</strong> est plus réaliste : il déduit les charges, la taxe foncière et inclut les frais de notaire dans le prix total d'acquisition.
+        </p>
+        <div class="formula-block">
+          Loyer annuel = Loyer mensuel × 12 × (1 − vacance/100)<br>
+          Rendement brut = (Loyer annuel / Prix d'achat) × 100<br>
+          Charges totales = Charges + Taxe foncière<br>
+          Rendement net = ((Loyer annuel − Charges totales) / (Prix + Frais notaire)) × 100
+        </div>
+        <p>
+          <strong style="color:var(--text)">Exemple :</strong> 150 000 € + 12 000 € frais, 700 €/mois, 600 € charges, 800 € taxe foncière :
+          Brut ≈ <strong style="color:var(--accent)">5,60 %</strong> — Net ≈ <strong style="color:var(--accent)">4,37 %</strong>.
+        </p>
+        <p>
+          <em style="color:var(--text-muted)">Un rendement brut de 5-6 % est généralement considéré comme correct en France. Au-dessus de 7 %, le bien peut présenter un risque locatif plus élevé (zone peu attractive, état du bien).</em>
+        </p>
+      </div>
+
+      <!-- Email capture -->
+      <div class="email-capture mt-md">
+        <div class="email-capture-title">📥 Guide gratuit : les 5 erreurs qui coûtent cher en épargne</div>
+        <p class="email-capture-sub">
+          Laisse ton email : accès immédiat au guide + les nouveaux calculateurs et repères finances perso. Gratuit, sans spam.
+        </p>
+        <form class="email-form lae-email-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="d97a8c73-b827-48bb-b437-e053a73fdb7e">
+          <input type="hidden" name="subject" value="L'Argent Calculateurs — lead (rendement locatif)">
+          <input type="hidden" name="from_name" value="L'Argent Calculateurs">
+          <input type="checkbox" name="botcheck" style="display:none !important" tabindex="-1" autocomplete="off">
+          <input type="email" name="email" placeholder="ton@email.fr" autocomplete="email" required aria-label="Adresse email" />
+          <button type="submit">Recevoir le guide →</button>
+        </form>
+        <p class="email-note">📌 Pas de spam. Désinscription en 1 clic. Voir la <a href="confidentialite.html">politique de confidentialité</a>.</p>
+        <div class="lae-email-error" style="display:none;">Une erreur est survenue. Réessaie dans un instant.</div>
+        <div class="lae-email-success" style="display:none;">
+          ✔ Merci ! Tu es sur la liste.
+          <br><a class="lae-guide-link" href="guides/5-erreurs-epargne.html" target="_blank" rel="noopener">📖 Accéder au guide maintenant →</a>
+        </div>
+      </div>
+
+      <!-- CTA YouTube -->
+      <div class="mt-md">
+        <a href="https://www.youtube.com/@tonargentexplique" class="yt-cta" target="_blank" rel="noopener">
+          <span class="yt-cta-icon">📺</span>
+          <span>Investissement locatif : calculer la vraie rentabilité →</span>
+          <span class="yt-cta-arrow">›</span>
+        </a>
+      </div>
+
+      <!-- Related -->
+      <div class="related-links mt-md">
+        <div class="related-title">Autres calculateurs</div>
+        <ul class="related-list" aria-label="Liens vers d'autres calculateurs">
+          <li><a href="credit-immobilier.html">Mensualité crédit immobilier — calcul détaillé</a></li>
+          <li><a href="capacite-emprunt.html">Capacité d'emprunt — combien puis-je emprunter ?</a></li>
+          <li><a href="salaire-brut-net.html">Salaire brut ↔ net France</a></li>
+          <li><a href="interets-composes.html">Intérêts composés — faire fructifier son épargne</a></li>
+          <li><a href="inflation-pouvoir-achat.html">Inflation — érosion du pouvoir d'achat</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-yt">
+        <a href="https://www.youtube.com/@tonargentexplique" target="_blank" rel="noopener">
+          📺 L'Argent Expliqué — La chaîne YouTube
+        </a>
+      </div>
+      <p class="footer-disclaimer">
+        <strong>⚠️ Contenu éducatif uniquement.</strong> Ces calculateurs ne constituent pas un conseil en investissement immobilier. Les rendements sont des estimations brutes et nettes simplifiées, hors fiscalité et frais de gestion. Consultez un conseiller en gestion de patrimoine (CGP) ou un notaire pour toute décision d'investissement.
+      </p>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="credit-immobilier.html">Crédit immo</a>
+        <a href="capacite-emprunt.html">Capacité emprunt</a>
+        <a href="salaire-brut-net.html">Salaire brut/net</a>
+        <a href="interets-composes.html">Intérêts composés</a>
+      </div>
+      <p class="footer-copy">
+        <a href="confidentialite.html" style="color:var(--text-muted);text-decoration:underline;">Politique de confidentialité</a>
+        &nbsp;·&nbsp; © 2026 L'Argent Expliqué — Tous droits réservés
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const elPrix      = document.getElementById("prixAchat");
+      const elFrais     = document.getElementById("fraisNotaire");
+      const elLoyer     = document.getElementById("loyerMensuel");
+      const elVacance   = document.getElementById("tauxVacance");
+      const elCharges   = document.getElementById("chargesAnnuelles");
+      const elTaxe      = document.getElementById("taxeFonciere");
+
+      const elResRendNet  = document.getElementById("resRendNet");
+      const elResSub      = document.getElementById("resSub");
+      const elRendBrut    = document.getElementById("resRendBrut");
+      const elRendNetB    = document.getElementById("resRendNetB");
+      const elLoyersAnn   = document.getElementById("resLoyersAnnuels");
+      const elChargesTotal = document.getElementById("resChargesTotal");
+      const elRatingBlock = document.getElementById("ratingBlock");
+      const elRatingAlert = document.getElementById("ratingAlert");
+      const elResultCard  = document.getElementById("resultCard");
+
+      function getRating(rendNetVal) {
+        if (rendNetVal < 2) return { cls: "alert-danger", msg: "⚠️ Rendement très faible (< 2 %) — difficile d'être rentable après impôts et imprévus." };
+        if (rendNetVal < 4) return { cls: "alert-warn", msg: "💬 Rendement faible (2-4 %) — acceptable en zone tendue (Paris, Lyon) mais attention au cash-flow." };
+        if (rendNetVal < 6) return { cls: "alert-info", msg: "✅ Rendement correct (4-6 %) — bonne base, à affiner avec la fiscalité réelle." };
+        if (rendNetVal < 8) return { cls: "alert-info", msg: "✅ Bon rendement (6-8 %) — attractif, vérifiez la qualité de la zone et du locataire." };
+        return { cls: "alert-warn", msg: "⚠️ Rendement élevé (> 8 %) — vérifiez le risque locatif, l'état du bien et la zone géographique." };
+      }
+
+      function compute() {
+        const prix   = parseVal(elPrix.value);
+        const frais  = parseVal(elFrais.value) || 0;
+        const loyer  = parseVal(elLoyer.value);
+        const vacance = parseVal(elVacance.value) || 0;
+        const charges = parseVal(elCharges.value) || 0;
+        const taxe   = parseVal(elTaxe.value) || 0;
+
+        let hasError = false;
+
+        const vP = validate(prix, "prix d'achat", { min: 1000, allowZero: false });
+        if (!vP.ok) { showError(elPrix, vP.error); hasError = true; }
+        else showError(elPrix, "");
+
+        const vL = validate(loyer, "loyer", { min: 1, allowZero: false });
+        if (!vL.ok) { showError(elLoyer, vL.error); hasError = true; }
+        else showError(elLoyer, "");
+
+        if (hasError) { if (elResultCard) elResultCard.classList.add("is-stale"); return; }
+        if (elResultCard) elResultCard.classList.remove("is-stale");
+
+        const vacanceFactor = 1 - vacance / 100;
+        const loyerAnnuel   = loyer * 12 * vacanceFactor;
+        const prixTotal     = prix + frais;
+        const chargesTotal  = charges + taxe;
+        const revenuNet     = loyerAnnuel - chargesTotal;
+
+        const rendBrut = prix > 0 ? (loyerAnnuel / prix) * 100 : 0;
+        const rendNet  = prixTotal > 0 ? (revenuNet / prixTotal) * 100 : 0;
+
+        elResRendNet.textContent     = fmtNum(rendNet, 2) + " %";
+        elResSub.textContent         = `Brut ${fmtNum(rendBrut, 2)} % · Net ${fmtNum(rendNet, 2)} % — loyers annuels nets : ${fmtEur(revenuNet)}`;
+        elRendBrut.textContent       = fmtNum(rendBrut, 2) + " %";
+        elRendNetB.textContent       = fmtNum(rendNet, 2) + " %";
+        elLoyersAnn.textContent      = fmtEur(loyerAnnuel);
+        elChargesTotal.textContent   = fmtEur(chargesTotal);
+
+        // Rating
+        const rating = getRating(rendNet);
+        elRatingBlock.style.display = "block";
+        elRatingAlert.className = "alert " + rating.cls;
+        elRatingAlert.textContent = rating.msg;
+
+        // Colour the main result
+        elResRendNet.style.color = rendNet < 4
+          ? "var(--warn)"
+          : rendNet >= 6
+            ? "var(--accent)"
+            : "var(--accent)";
+      }
+
+      [elPrix, elFrais, elLoyer, elVacance, elCharges, elTaxe].forEach(el => {
+        el.addEventListener("input", compute);
+        el.addEventListener("change", compute);
+      });
+
+      compute();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Remboursement anticipé — économie d'intérêts | L'Argent Expliqué</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💶</text></svg>">
+  <meta name="description" content="Calculez combien vous économisez en remboursant votre crédit par anticipation : capital restant dû, intérêts économisés, pénalités IRA. Gratuit." />
+  <meta property="og:title" content="Calculateur remboursement anticipé | L'Argent Expliqué" />
+  <meta property="og:description" content="Combien économisez-vous en remboursant votre crédit plus tôt ? Capital restant, économie d'intérêts, pénalités IRA estimées." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://tonargentexplique.fr/assets/img/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://tonargentexplique.fr/remboursement-anticipe.html" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculateur de remboursement anticipé",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "description": "Calculez l'économie d'intérêts réalisée en remboursant votre crédit par anticipation, ainsi que les pénalités IRA éventuelles.",
+    "inLanguage": "fr-FR",
+    "isAccessibleForFree": true,
+    "url": "https://tonargentexplique.fr/remboursement-anticipe.html"
+  }
+  </script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="d0fa94fe-a108-4590-a465-8f0017569370"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="L'Argent Expliqué — Accueil calculateurs">
+        <span class="brand-name">💶 L'Argent Expliqué</span>
+        <span class="brand-sub">Calculateurs gratuits</span>
+      </a>
+      <a href="https://www.youtube.com/@tonargentexplique" class="header-cta" target="_blank" rel="noopener">
+        📺 La chaîne
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="container">
+
+      <nav class="breadcrumb" aria-label="Navigation">
+        <a href="index.html">Calculateurs</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Crédit &amp; emprunt</span>
+        <span class="breadcrumb-sep">›</span>
+        <span>Remboursement anticipé</span>
+      </nav>
+
+      <!-- Calculator card -->
+      <div class="calc-card mt-sm">
+        <h1 class="calc-title">⏩ Remboursement anticipé</h1>
+        <p class="calc-intro">
+          Entrez les paramètres de votre prêt et le moment où vous souhaitez rembourser.
+          Ce calculateur vous indique le capital restant dû, l'économie d'intérêts réalisée
+          et les éventuelles pénalités IRA (Indemnités de Remboursement Anticipé).
+          <em style="color:var(--text-muted); font-style:normal;"> Vérifiez les pénalités exactes dans votre contrat de prêt.</em>
+        </p>
+
+        <form id="calcForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="capital">Capital emprunté<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="capital" value="150000" min="1000" max="2000000" step="1000" inputmode="decimal" aria-describedby="capitalErr" />
+                <span class="input-unit">€</span>
+              </div>
+              <span class="input-error" id="capitalErr" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="taux">Taux annuel<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="taux" value="3" min="0.01" max="20" step="0.05" inputmode="decimal" aria-describedby="tauxErr" />
+                <span class="input-unit">%</span>
+              </div>
+              <span class="input-error" id="tauxErr" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="duree">Durée totale<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="duree" value="20" min="1" max="30" step="1" inputmode="decimal" aria-describedby="dureeErr" />
+                <span class="input-unit">ans</span>
+              </div>
+              <span class="input-error" id="dureeErr" role="alert"></span>
+            </div>
+            <div class="form-group">
+              <label for="moisEcoules">Mois déjà écoulés<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="moisEcoules" value="60" min="1" max="360" step="1" inputmode="decimal" aria-describedby="moisErr" />
+                <span class="input-unit">mois</span>
+              </div>
+              <span class="input-error" id="moisErr" role="alert"></span>
+            </div>
+          </div>
+
+          <!-- Pénalités IRA -->
+          <div class="form-group">
+            <label for="iraMode">Pénalités IRA (optionnel)</label>
+            <select id="iraMode" style="width:100%; background:var(--bg-input); border:1.5px solid var(--border); border-radius:var(--radius-sm); color:var(--text); font-family:var(--font); font-size:1rem; padding:12px 14px; outline:none; min-height:48px;">
+              <option value="aucune">Aucune pénalité (prêt immo &gt; 25 ans ou exonéré)</option>
+              <option value="legale" selected>Plafond légal immo (3 % CRD ou 6 mois d'intérêts)</option>
+              <option value="conso">Crédit conso (1 % si &gt; 1 an restant)</option>
+              <option value="manuelle">Saisir un montant manuel</option>
+            </select>
+          </div>
+          <div class="form-group" id="iraManuelGroup" style="display:none;">
+            <label for="iraManuel">Pénalités IRA (montant exact)</label>
+            <div class="input-wrap">
+              <input type="number" id="iraManuel" value="0" min="0" step="100" inputmode="decimal" />
+              <span class="input-unit">€</span>
+            </div>
+          </div>
+        </form>
+
+        <!-- Result -->
+        <div class="result-card" id="resultCard" aria-live="polite">
+          <div class="result-label">Économie nette d'intérêts</div>
+          <div class="result-main" id="resEconomie">—</div>
+          <div class="result-sub" id="resSub"></div>
+          <div class="result-grid" style="margin-top:16px;">
+            <div class="result-item">
+              <div class="ri-label">Capital restant dû</div>
+              <div class="ri-value" id="resCRD">—</div>
+            </div>
+            <div class="result-item accent">
+              <div class="ri-label">Intérêts économisés</div>
+              <div class="ri-value" id="resIntEco">—</div>
+            </div>
+            <div class="result-item warn">
+              <div class="ri-label">Pénalités IRA</div>
+              <div class="ri-value" id="resIRA">—</div>
+            </div>
+            <div class="result-item">
+              <div class="ri-label">Coût déjà payé</div>
+              <div class="ri-value" id="resIntPaids">—</div>
+            </div>
+          </div>
+          <div id="alertIRA" class="alert alert-warn mt-md" style="display:none;"></div>
+        </div>
+
+        <!-- Ad slot -->
+        <!-- AD_SLOT: rectangle 300x250 -->
+        <div class="ad-placeholder"></div>
+
+      </div><!-- /calc-card -->
+
+      <!-- How it works -->
+      <div class="how-it-works">
+        <div class="how-title">📐 Comment ça marche</div>
+        <p>
+          Le <strong style="color:var(--text)">capital restant dû</strong> (CRD) après <em>k</em> mois se calcule ainsi :
+          chaque mensualité rembourse d'abord les intérêts sur le solde restant, puis le reste réduit le capital.
+        </p>
+        <div class="formula-block">
+          t = taux_annuel / 12<br>
+          M = C × t / (1 − (1 + t)^−n)<br>
+          CRD_k = M / t × (1 − (1 + t)^−(n − k))
+        </div>
+        <p>
+          Exemple vérifié : 150 000 € à 3 %/an sur 20 ans (240 mois) →
+          M = 831,90 €/mois. Après 60 mois :
+          <strong style="color:var(--accent)">CRD = 120 463 €</strong>,
+          intérêts déjà payés = 20 377 €,
+          économie si remboursement total = <strong style="color:var(--accent)">29 278 €</strong>.
+        </p>
+        <p>
+          <strong style="color:var(--text)">Pénalités IRA (prêt immobilier) :</strong>
+          le code de la consommation plafonne les IRA au minimum entre 3 % du CRD et 6 mois d'intérêts au taux du prêt.
+          Certains contrats prévoient une exonération. Vérifiez toujours votre offre de prêt.
+        </p>
+      </div>
+
+      <!-- Email capture -->
+      <div class="email-capture mt-md">
+        <div class="email-capture-title">📥 Guide gratuit : les 5 erreurs qui coûtent cher en épargne</div>
+        <p class="email-capture-sub">
+          Laisse ton email : accès immédiat au guide + les nouveaux calculateurs et repères finances perso. Gratuit, sans spam.
+        </p>
+        <form class="email-form lae-email-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="d97a8c73-b827-48bb-b437-e053a73fdb7e">
+          <input type="hidden" name="subject" value="L'Argent Calculateurs — lead (remboursement anticipé)">
+          <input type="hidden" name="from_name" value="L'Argent Calculateurs">
+          <input type="checkbox" name="botcheck" style="display:none !important" tabindex="-1" autocomplete="off">
+          <input type="email" name="email" placeholder="ton@email.fr" autocomplete="email" required aria-label="Adresse email" />
+          <button type="submit">Recevoir le guide →</button>
+        </form>
+        <p class="email-note">📌 Pas de spam. Désinscription en 1 clic. Voir la <a href="confidentialite.html">politique de confidentialité</a>.</p>
+        <div class="lae-email-error" style="display:none;">Une erreur est survenue. Réessaie dans un instant.</div>
+        <div class="lae-email-success" style="display:none;">
+          ✔ Merci ! Tu es sur la liste.
+          <br><a class="lae-guide-link" href="guides/5-erreurs-epargne.html" target="_blank" rel="noopener">📖 Accéder au guide maintenant →</a>
+        </div>
+      </div>
+
+      <!-- CTA YouTube -->
+      <div class="mt-md">
+        <a href="https://www.youtube.com/@tonargentexplique" class="yt-cta" target="_blank" rel="noopener">
+          <span class="yt-cta-icon">📺</span>
+          <span>Rembourser son crédit plus tôt : ça vaut le coup ? →</span>
+          <span class="yt-cta-arrow">›</span>
+        </a>
+      </div>
+
+      <!-- SEO text -->
+      <div class="how-it-works mt-md">
+        <div class="how-title">💡 Quand rembourser par anticipation ?</div>
+        <p>
+          Rembourser un crédit par anticipation est pertinent quand <strong style="color:var(--text)">le coût du crédit dépasse le rendement
+          de votre épargne</strong>. Si vous remboursez un prêt à 3 % d'intérêts mais que votre épargne ne rapporte que 2,5 %,
+          chaque euro remboursé par anticipation vous « rapporte » 0,5 % net.
+        </p>
+        <p>
+          À l'inverse, si vous avez un prêt immobilier ancien à 1,2 % et une épargne qui rapporte 3 %,
+          il vaut mieux garder le prêt et placer votre argent.
+          <strong style="color:var(--text)">Utilisez ce calculateur pour comparer votre gain réel après pénalités IRA.</strong>
+        </p>
+        <p>
+          Ce calculateur est fourni à titre <strong style="color:var(--text)">éducatif et indicatif uniquement</strong>. Il ne constitue pas un conseil financier.
+          Les pénalités IRA exactes figurent dans votre contrat de prêt.
+        </p>
+      </div>
+
+      <!-- Related -->
+      <div class="related-links mt-md">
+        <div class="related-title">Calculateurs liés</div>
+        <ul class="related-list" aria-label="Calculateurs liés au crédit">
+          <li><a href="mensualite-pret.html">Mensualité de prêt auto ou conso</a></li>
+          <li><a href="cout-total-credit.html">Coût total du crédit</a></li>
+          <li><a href="credit-immobilier.html">Mensualité crédit immobilier</a></li>
+          <li><a href="interets-composes.html">Intérêts composés — faire fructifier son épargne</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-yt">
+        <a href="https://www.youtube.com/@tonargentexplique" target="_blank" rel="noopener">
+          📺 L'Argent Expliqué — La chaîne YouTube
+        </a>
+      </div>
+      <p class="footer-disclaimer">
+        <strong>⚠️ Contenu éducatif uniquement.</strong> Ces calculateurs ne constituent pas un conseil financier. Les pénalités IRA exactes sont définies dans votre contrat de prêt. Consultez un professionnel agréé.
+      </p>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="mensualite-pret.html">Mensualité prêt</a>
+        <a href="cout-total-credit.html">Coût crédit</a>
+        <a href="credit-immobilier.html">Crédit immo</a>
+        <a href="capacite-emprunt.html">Capacité emprunt</a>
+      </div>
+      <p class="footer-copy">
+        <a href="confidentialite.html" style="color:var(--text-muted);text-decoration:underline;">Politique de confidentialité</a>
+        &nbsp;·&nbsp; © 2026 L'Argent Expliqué — Tous droits réservés
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const elCapital     = document.getElementById("capital");
+      const elTaux        = document.getElementById("taux");
+      const elDuree       = document.getElementById("duree");
+      const elMoisEcoules = document.getElementById("moisEcoules");
+      const elIraMode     = document.getElementById("iraMode");
+      const elIraManuel   = document.getElementById("iraManuel");
+      const iraManuelGrp  = document.getElementById("iraManuelGroup");
+      const elEconomie    = document.getElementById("resEconomie");
+      const elSub         = document.getElementById("resSub");
+      const elCRD         = document.getElementById("resCRD");
+      const elIntEco      = document.getElementById("resIntEco");
+      const elIRA         = document.getElementById("resIRA");
+      const elIntPaid     = document.getElementById("resIntPaids");
+      const alertIRA      = document.getElementById("alertIRA");
+      const elResultCard  = document.getElementById("resultCard");
+
+      elIraMode.addEventListener("change", function () {
+        iraManuelGrp.style.display = this.value === "manuelle" ? "block" : "none";
+        compute();
+      });
+
+      function calcIRA(mode, CRD, tauxAnnuel, moisRestants, mensualite) {
+        if (mode === "aucune") return 0;
+        if (mode === "legale") {
+          // Plafond légal: min(3% CRD, 6 mois d'intérêts)
+          const ira3pct   = 0.03 * CRD;
+          const ira6mois  = (tauxAnnuel / 12) * CRD * 6;
+          return Math.min(ira3pct, ira6mois);
+        }
+        if (mode === "conso") {
+          // 1 % CRD si > 1 an restant, 0.5 % sinon
+          return moisRestants > 12 ? 0.01 * CRD : 0.005 * CRD;
+        }
+        if (mode === "manuelle") return parseVal(elIraManuel.value) || 0;
+        return 0;
+      }
+
+      function compute() {
+        const C  = parseVal(elCapital.value);
+        const r  = parseVal(elTaux.value) / 100;
+        const d  = parseVal(elDuree.value);
+        const k  = parseVal(elMoisEcoules.value);
+
+        let hasError = false;
+
+        const vC = validate(C, "capital", { min: 1000, allowZero: false });
+        if (!vC.ok) { showError(elCapital, vC.error); hasError = true; }
+        else { showError(elCapital, ""); }
+
+        const vR = validate(r * 100, "taux", { min: 0.01, max: 20, allowZero: false });
+        if (!vR.ok) { showError(elTaux, vR.error); hasError = true; }
+        else { showError(elTaux, ""); }
+
+        const vD = validate(d, "durée", { min: 1, max: 30, allowZero: false });
+        if (!vD.ok) { showError(elDuree, vD.error); hasError = true; }
+        else { showError(elDuree, ""); }
+
+        const nTotal = d * 12;
+        const vK = validate(k, "mois écoulés", { min: 1, max: nTotal - 1, allowZero: false });
+        if (!vK.ok) { showError(elMoisEcoules, vK.error); hasError = true; }
+        else { showError(elMoisEcoules, ""); }
+
+        if (hasError) { if (elResultCard) elResultCard.classList.add("is-stale"); return; }
+        if (elResultCard) elResultCard.classList.remove("is-stale");
+
+        const t = r / 12;
+        // M = C * t / (1 - (1+t)^-n)
+        // Formule vérifiée: 150 000 € à 3%/an sur 240 mois → M = 831,90 €
+        const M = C * t / (1 - Math.pow(1 + t, -nTotal));
+        const totalSansRembAnticipe = M * nTotal;
+        const totalIntNormal = totalSansRembAnticipe - C;
+
+        // CRD après k mois
+        // CRD_k = M/t * (1 - (1+t)^-(n-k))
+        // Formule vérifiée: après 60 mois → CRD = 120 463 €
+        const moisRestants = nTotal - k;
+        const CRD = M / t * (1 - Math.pow(1 + t, -moisRestants));
+
+        // Intérêts déjà payés
+        const capitalRembourse = C - CRD;
+        const intDejaPayes = M * k - capitalRembourse;
+
+        // Économie brute = intérêts qui auraient été payés sur les mois restants
+        const intRestantsNormaux = M * moisRestants - CRD;
+
+        // IRA
+        const ira = calcIRA(elIraMode.value, CRD, r, moisRestants, M);
+        const economiNette = intRestantsNormaux - ira;
+
+        elCRD.textContent      = fmtEur(CRD);
+        elIntEco.textContent   = fmtEur(intRestantsNormaux);
+        elIRA.textContent      = fmtEur(ira);
+        elIntPaid.textContent  = fmtEur(intDejaPayes);
+        elEconomie.textContent = fmtEur(economiNette);
+        elSub.textContent      = `Remboursement au mois ${k} sur ${nTotal} — ${moisRestants} mois restants`;
+
+        if (ira > 0) {
+          alertIRA.style.display = "block";
+          alertIRA.textContent = `⚠️ Pénalités IRA estimées : ${fmtEur(ira)}. Ces pénalités réduisent votre économie nette. Vérifiez le montant exact dans votre contrat de prêt.`;
+        } else {
+          alertIRA.style.display = "none";
+        }
+      }
+
+      [elCapital, elTaux, elDuree, elMoisEcoules, elIraManuel].forEach(el => {
+        el.addEventListener("input", compute);
+        el.addEventListener("change", compute);
+      });
+
+      compute();
+    })();
+  </script>
+</body>
+</html>

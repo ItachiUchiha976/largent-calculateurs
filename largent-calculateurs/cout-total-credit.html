@@ -1,0 +1,489 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coût total d'un crédit — calculateur gratuit | L'Argent Expliqué</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💶</text></svg>">
+  <meta name="description" content="Calculez le coût total de votre crédit : intérêts payés sur toute la durée du prêt. Comparez plusieurs scénarios (taux, durée). Gratuit, sans inscription." />
+  <meta property="og:title" content="Coût total d'un crédit | L'Argent Expliqué" />
+  <meta property="og:description" content="Combien coûte réellement votre crédit ? Intérêts totaux, coût en % du capital, comparaison de scénarios." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://tonargentexplique.fr/assets/img/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://tonargentexplique.fr/cout-total-credit.html" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculateur de coût total d'un crédit",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "description": "Calculez le coût total d'un crédit immobilier, auto ou conso : intérêts totaux, coût en % du capital, comparaison de scénarios taux/durée.",
+    "inLanguage": "fr-FR",
+    "isAccessibleForFree": true,
+    "url": "https://tonargentexplique.fr/cout-total-credit.html"
+  }
+  </script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="d0fa94fe-a108-4590-a465-8f0017569370"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="L'Argent Expliqué — Accueil calculateurs">
+        <span class="brand-name">💶 L'Argent Expliqué</span>
+        <span class="brand-sub">Calculateurs gratuits</span>
+      </a>
+      <a href="https://www.youtube.com/@tonargentexplique" class="header-cta" target="_blank" rel="noopener">
+        📺 La chaîne
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="container">
+
+      <nav class="breadcrumb" aria-label="Navigation">
+        <a href="index.html">Calculateurs</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Crédit &amp; emprunt</span>
+        <span class="breadcrumb-sep">›</span>
+        <span>Coût total du crédit</span>
+      </nav>
+
+      <!-- Calculator card -->
+      <div class="calc-card mt-sm">
+        <h1 class="calc-title">💰 Coût total d'un crédit</h1>
+        <p class="calc-intro">
+          Au-delà de la mensualité, ce qui compte c'est combien vous payez <em>en plus</em> du capital emprunté.
+          Entrez vos paramètres et comparez deux scénarios pour trouver la meilleure option.
+          <em style="color:var(--text-muted); font-style:normal;"> Résultat indicatif hors assurance et frais de dossier.</em>
+        </p>
+
+        <!-- Scénario principal -->
+        <div style="margin-bottom:4px;">
+          <span style="font-size:0.82rem; font-weight:700; color:var(--accent);">Scénario A</span>
+        </div>
+        <form id="calcFormA" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="capitalA">Montant emprunté<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="capitalA" value="15000" min="100" max="2000000" step="100" inputmode="decimal" />
+                <span class="input-unit">€</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="tauxA">Taux annuel<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="tauxA" value="4" min="0.01" max="50" step="0.1" inputmode="decimal" />
+                <span class="input-unit">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dureeA">Durée<span class="required">*</span></label>
+              <div class="input-wrap">
+                <input type="number" id="dureeA" value="5" min="1" max="30" step="1" inputmode="decimal" />
+                <span class="input-unit">ans</span>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- Result A -->
+        <div class="result-card" id="resultCardA" aria-live="polite">
+          <div class="result-label">Total des intérêts — Scénario A</div>
+          <div class="result-main" id="resInteretsA">—</div>
+          <div class="result-sub" id="resSubA"></div>
+          <div class="result-grid" style="margin-top:16px;">
+            <div class="result-item">
+              <div class="ri-label">Mensualité</div>
+              <div class="ri-value" id="resMensA">—</div>
+            </div>
+            <div class="result-item accent">
+              <div class="ri-label">Total remboursé</div>
+              <div class="ri-value" id="resTotalA">—</div>
+            </div>
+            <div class="result-item">
+              <div class="ri-label">Coût / capital</div>
+              <div class="ri-value" id="resCoutPctA">—</div>
+            </div>
+            <div class="result-item accent">
+              <div class="ri-label">Intérêts 1ère année</div>
+              <div class="ri-value" id="resInt1A">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="divider" style="margin:20px 0;" />
+
+        <!-- Scénario B -->
+        <div style="margin-bottom:4px;">
+          <span style="font-size:0.82rem; font-weight:700; color:var(--warn);">Scénario B (comparaison)</span>
+        </div>
+        <form id="calcFormB" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="capitalB">Montant emprunté</label>
+              <div class="input-wrap">
+                <input type="number" id="capitalB" value="15000" min="100" max="2000000" step="100" inputmode="decimal" />
+                <span class="input-unit">€</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="tauxB">Taux annuel</label>
+              <div class="input-wrap">
+                <input type="number" id="tauxB" value="3" min="0.01" max="50" step="0.1" inputmode="decimal" />
+                <span class="input-unit">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dureeB">Durée</label>
+              <div class="input-wrap">
+                <input type="number" id="dureeB" value="3" min="1" max="30" step="1" inputmode="decimal" />
+                <span class="input-unit">ans</span>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- Result B -->
+        <div class="result-card" id="resultCardB" style="border-color:var(--warn);" aria-live="polite">
+          <div class="result-label">Total des intérêts — Scénario B</div>
+          <div class="result-main" style="color:var(--warn);" id="resInteretsB">—</div>
+          <div class="result-sub" id="resSubB"></div>
+          <div class="result-grid" style="margin-top:16px;">
+            <div class="result-item">
+              <div class="ri-label">Mensualité</div>
+              <div class="ri-value" id="resMensB">—</div>
+            </div>
+            <div class="result-item warn">
+              <div class="ri-label">Total remboursé</div>
+              <div class="ri-value" id="resTotalB">—</div>
+            </div>
+            <div class="result-item">
+              <div class="ri-label">Coût / capital</div>
+              <div class="ri-value" id="resCoutPctB">—</div>
+            </div>
+            <div class="result-item warn">
+              <div class="ri-label">Différence vs A</div>
+              <div class="ri-value" id="resDiff">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ad slot -->
+        <!-- AD_SLOT: rectangle 300x250 -->
+        <div class="ad-placeholder"></div>
+
+        <!-- Chart -->
+        <div class="chart-wrap mt-md">
+          <div class="chart-title">Répartition capital / intérêts</div>
+          <canvas id="chart" data-height="180" role="img" aria-label="Graphique coût du crédit"></canvas>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--accent)"></div>
+              <span>Scénario A</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background:var(--warn)"></div>
+              <span>Scénario B</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /calc-card -->
+
+      <!-- How it works -->
+      <div class="how-it-works">
+        <div class="how-title">📐 Comment ça marche</div>
+        <p>
+          Le coût total d'un crédit correspond à la somme de toutes les mensualités <strong style="color:var(--text)">moins le capital emprunté</strong>.
+          C'est ce que vous payez en échange du service de prêt.
+        </p>
+        <div class="formula-block">
+          t = taux_annuel / 12<br>
+          M = C × t / (1 − (1 + t)^−n)<br>
+          Coût total = M × n − C
+        </div>
+        <p>
+          Exemple vérifié : 15 000 € à 4 %/an sur 5 ans (60 mois) →
+          t = 0,003333 → M = 276,25 € →
+          <strong style="color:var(--accent)">Coût total = 1 574,80 € d'intérêts</strong>.
+        </p>
+        <p>
+          En raccourcissant la durée (ex : 3 ans) ou en obtenant un meilleur taux, vous réduisez mécaniquement les intérêts —
+          au prix d'une mensualité plus élevée. C'est le compromis fondamental de tout crédit.
+        </p>
+      </div>
+
+      <!-- Email capture -->
+      <div class="email-capture mt-md">
+        <div class="email-capture-title">📥 Guide gratuit : les 5 erreurs qui coûtent cher en épargne</div>
+        <p class="email-capture-sub">
+          Laisse ton email : accès immédiat au guide + les nouveaux calculateurs et repères finances perso. Gratuit, sans spam.
+        </p>
+        <form class="email-form lae-email-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="d97a8c73-b827-48bb-b437-e053a73fdb7e">
+          <input type="hidden" name="subject" value="L'Argent Calculateurs — lead (coût total du crédit)">
+          <input type="hidden" name="from_name" value="L'Argent Calculateurs">
+          <input type="checkbox" name="botcheck" style="display:none !important" tabindex="-1" autocomplete="off">
+          <input type="email" name="email" placeholder="ton@email.fr" autocomplete="email" required aria-label="Adresse email" />
+          <button type="submit">Recevoir le guide →</button>
+        </form>
+        <p class="email-note">📌 Pas de spam. Désinscription en 1 clic. Voir la <a href="confidentialite.html">politique de confidentialité</a>.</p>
+        <div class="lae-email-error" style="display:none;">Une erreur est survenue. Réessaie dans un instant.</div>
+        <div class="lae-email-success" style="display:none;">
+          ✔ Merci ! Tu es sur la liste.
+          <br><a class="lae-guide-link" href="guides/5-erreurs-epargne.html" target="_blank" rel="noopener">📖 Accéder au guide maintenant →</a>
+        </div>
+      </div>
+
+      <!-- CTA YouTube -->
+      <div class="mt-md">
+        <a href="https://www.youtube.com/@tonargentexplique" class="yt-cta" target="_blank" rel="noopener">
+          <span class="yt-cta-icon">📺</span>
+          <span>Ce que ton crédit te coûte vraiment →</span>
+          <span class="yt-cta-arrow">›</span>
+        </a>
+      </div>
+
+      <!-- SEO text -->
+      <div class="how-it-works mt-md">
+        <div class="how-title">💡 Pourquoi calculer le coût total ?</div>
+        <p>
+          La plupart des gens se focalisent sur la mensualité. Mais c'est le <strong style="color:var(--text)">coût total des intérêts</strong>
+          qui reflète le vrai prix de votre crédit. Un prêt de 200 000 € à 3 % sur 20 ans génère plus de 63 000 € d'intérêts —
+          soit 31 % du capital emprunté en plus.
+        </p>
+        <p>
+          Utilisez la comparaison A/B pour évaluer l'impact d'une <strong style="color:var(--text)">négociation de taux</strong> (−0,5 % sur un prêt immobilier
+          peut économiser plusieurs milliers d'euros) ou le bénéfice de <strong style="color:var(--text)">raccourcir la durée</strong>.
+        </p>
+        <p>
+          Ce calculateur est fourni à titre <strong style="color:var(--text)">éducatif et indicatif uniquement</strong>. Il ne constitue pas un conseil financier.
+        </p>
+      </div>
+
+      <!-- Related -->
+      <div class="related-links mt-md">
+        <div class="related-title">Calculateurs liés</div>
+        <ul class="related-list" aria-label="Calculateurs liés au crédit">
+          <li><a href="mensualite-pret.html">Mensualité de prêt auto ou conso</a></li>
+          <li><a href="remboursement-anticipe.html">Remboursement anticipé — économisez des intérêts</a></li>
+          <li><a href="credit-immobilier.html">Mensualité crédit immobilier</a></li>
+          <li><a href="capacite-emprunt.html">Capacité d'emprunt</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-yt">
+        <a href="https://www.youtube.com/@tonargentexplique" target="_blank" rel="noopener">
+          📺 L'Argent Expliqué — La chaîne YouTube
+        </a>
+      </div>
+      <p class="footer-disclaimer">
+        <strong>⚠️ Contenu éducatif uniquement.</strong> Ces calculateurs ne constituent pas un conseil financier ou en investissement. Les résultats sont des simulations mathématiques. Consultez un professionnel agréé pour toute décision de crédit.
+      </p>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="mensualite-pret.html">Mensualité prêt</a>
+        <a href="remboursement-anticipe.html">Remboursement anticipé</a>
+        <a href="credit-immobilier.html">Crédit immo</a>
+        <a href="capacite-emprunt.html">Capacité emprunt</a>
+      </div>
+      <p class="footer-copy">
+        <a href="confidentialite.html" style="color:var(--text-muted);text-decoration:underline;">Politique de confidentialité</a>
+        &nbsp;·&nbsp; © 2026 L'Argent Expliqué — Tous droits réservés
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      // ---- Helpers ----
+      function calcCredit(C, tauxAnnuel, dureeAns) {
+        const t = tauxAnnuel / 12;
+        const n = dureeAns * 12;
+        if (t === 0) {
+          const M = C / n;
+          return { M, n, total: C, interets: 0, int1: 0 };
+        }
+        const M = C * t / (1 - Math.pow(1 + t, -n));
+        const total = M * n;
+        const interets = total - C;
+        // Intérêts de la 1ère année (12 premiers mois)
+        let solde = C;
+        let int1 = 0;
+        for (let k = 0; k < 12 && k < n; k++) {
+          const i_k = solde * t;
+          int1 += i_k;
+          solde -= (M - i_k);
+        }
+        return { M, n, total, interets, int1 };
+      }
+
+      // ---- DOM ----
+      const inputs = {
+        A: {
+          capital: document.getElementById("capitalA"),
+          taux:    document.getElementById("tauxA"),
+          duree:   document.getElementById("dureeA"),
+          resInterets: document.getElementById("resInteretsA"),
+          resSub:      document.getElementById("resSubA"),
+          resMens:     document.getElementById("resMensA"),
+          resTotal:    document.getElementById("resTotalA"),
+          resCoutPct:  document.getElementById("resCoutPctA"),
+          resInt1:     document.getElementById("resInt1A"),
+        },
+        B: {
+          capital: document.getElementById("capitalB"),
+          taux:    document.getElementById("tauxB"),
+          duree:   document.getElementById("dureeB"),
+          resInterets: document.getElementById("resInteretsB"),
+          resSub:      document.getElementById("resSubB"),
+          resMens:     document.getElementById("resMensB"),
+          resTotal:    document.getElementById("resTotalB"),
+          resCoutPct:  document.getElementById("resCoutPctB"),
+          resDiff:     document.getElementById("resDiff"),
+        }
+      };
+      const canvas = document.getElementById("chart");
+
+      let dataA = null, dataB = null;
+
+      function compute() {
+        const CA = parseVal(inputs.A.capital.value);
+        const rA = parseVal(inputs.A.taux.value) / 100;
+        const dA = parseVal(inputs.A.duree.value);
+
+        const CB = parseVal(inputs.B.capital.value);
+        const rB = parseVal(inputs.B.taux.value) / 100;
+        const dB = parseVal(inputs.B.duree.value);
+
+        if (!isNaN(CA) && !isNaN(rA) && !isNaN(dA) && CA > 0 && rA > 0 && dA >= 1) {
+          dataA = calcCredit(CA, rA, dA);
+          inputs.A.resInterets.textContent = fmtEur(dataA.interets);
+          inputs.A.resSub.textContent = `Mensualité ${fmtEur(dataA.M)} × ${dataA.n} mois à ${fmtNum(rA*100,2)} %/an`;
+          inputs.A.resMens.textContent    = fmtEur(dataA.M);
+          inputs.A.resTotal.textContent   = fmtEur(dataA.total);
+          inputs.A.resCoutPct.textContent = fmtPct(dataA.interets / CA);
+          inputs.A.resInt1.textContent    = fmtEur(dataA.int1);
+        }
+
+        if (!isNaN(CB) && !isNaN(rB) && !isNaN(dB) && CB > 0 && rB > 0 && dB >= 1) {
+          dataB = calcCredit(CB, rB, dB);
+          inputs.B.resInterets.textContent = fmtEur(dataB.interets);
+          inputs.B.resSub.textContent = `Mensualité ${fmtEur(dataB.M)} × ${dataB.n} mois à ${fmtNum(rB*100,2)} %/an`;
+          inputs.B.resMens.textContent    = fmtEur(dataB.M);
+          inputs.B.resTotal.textContent   = fmtEur(dataB.total);
+          inputs.B.resCoutPct.textContent = fmtPct(dataB.interets / CB);
+
+          if (dataA) {
+            const diff = dataB.interets - dataA.interets;
+            inputs.B.resDiff.textContent = (diff >= 0 ? "+" : "") + fmtEur(diff);
+            inputs.B.resDiff.style.color = diff < 0 ? "var(--accent)" : "var(--danger)";
+          }
+        }
+
+        drawCostChart();
+      }
+
+      function drawCostChart() {
+        if (!canvas || (!dataA && !dataB)) return;
+        const { ctx, w, h } = getCtx(canvas);
+        ctx.clearRect(0, 0, w, h);
+
+        const pad = { top: 16, right: 14, bottom: 36, left: 58 };
+        const chartW = w - pad.left - pad.right;
+        const chartH = h - pad.top - pad.bottom;
+
+        const scenarios = [];
+        if (dataA) scenarios.push({ label: "A Capital", value: inputs.A.capital.value * 1, color: COLORS.accentDim });
+        if (dataA) scenarios.push({ label: "A Intérêts", value: dataA.interets, color: COLORS.accent });
+        if (dataB) scenarios.push({ label: "B Capital", value: inputs.B.capital.value * 1, color: "#d4a200" });
+        if (dataB) scenarios.push({ label: "B Intérêts", value: dataB.interets, color: COLORS.warn });
+
+        const maxVal = Math.max(...scenarios.map(s => s.value), 1);
+        const barGap = 8;
+        const barW = (chartW - barGap * (scenarios.length - 1)) / scenarios.length;
+
+        // Grid
+        const steps = 4;
+        ctx.strokeStyle = COLORS.grid;
+        ctx.lineWidth = 0.5;
+        ctx.fillStyle = COLORS.text;
+        ctx.font = "10px -apple-system, sans-serif";
+        ctx.textAlign = "right";
+        ctx.textBaseline = "middle";
+
+        for (let s = 0; s <= steps; s++) {
+          const ratio = s / steps;
+          const y = pad.top + chartH * (1 - ratio);
+          const val = maxVal * ratio;
+          ctx.beginPath();
+          ctx.moveTo(pad.left, y); ctx.lineTo(w - pad.right, y);
+          ctx.stroke();
+          let label;
+          if (val >= 1e6) label = fmtNum(val/1e6, 1) + " M€";
+          else if (val >= 1e3) label = fmtNum(val/1e3, 0) + " k€";
+          else label = fmtNum(val, 0) + " €";
+          ctx.fillText(label, pad.left - 4, y);
+        }
+
+        scenarios.forEach((s, i) => {
+          const x = pad.left + i * (barW + barGap);
+          const bH = (s.value / maxVal) * chartH;
+          const y = pad.top + chartH - bH;
+          const r = Math.min(4, barW / 2);
+          ctx.fillStyle = s.color;
+          ctx.beginPath();
+          ctx.moveTo(x + r, y);
+          ctx.lineTo(x + barW - r, y);
+          ctx.quadraticCurveTo(x + barW, y, x + barW, y + r);
+          ctx.lineTo(x + barW, y + bH);
+          ctx.lineTo(x, y + bH);
+          ctx.lineTo(x, y + r);
+          ctx.quadraticCurveTo(x, y, x + r, y);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.fillStyle = COLORS.text;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "top";
+          ctx.font = "8px -apple-system, sans-serif";
+          ctx.fillText(s.label, x + barW / 2, pad.top + chartH + 4);
+        });
+      }
+
+      registerChart(canvas, drawCostChart);
+
+      Object.values(inputs).forEach(grp => {
+        [grp.capital, grp.taux, grp.duree].forEach(el => {
+          el.addEventListener("input", compute);
+          el.addEventListener("change", compute);
+        });
+      });
+
+      compute();
+    })();
+  </script>
+</body>
+</html>

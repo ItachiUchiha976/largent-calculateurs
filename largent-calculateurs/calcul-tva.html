@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculateur TVA gratuit — HT vers TTC et TTC vers HT | L'Argent Expliqué</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💶</text></svg>">
+  <meta name="description" content="Calculez la TVA en France : convertissez HT en TTC ou TTC en HT pour les taux 20 %, 10 % et 5,5 %. Résultat instantané, aucune inscription." />
+  <meta property="og:title" content="Calculateur TVA France | L'Argent Expliqué" />
+  <meta property="og:description" content="Conversion HT ↔ TTC pour les 3 taux de TVA français (20 %, 10 %, 5,5 %). Résultat immédiat." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://tonargentexplique.fr/assets/img/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://tonargentexplique.fr/calcul-tva.html" />
+  <link rel="stylesheet" href="assets/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculateur TVA France",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "description": "Convertissez instantanément HT en TTC (ou TTC en HT) pour les taux de TVA français : 20 %, 10 %, 5,5 %.",
+    "inLanguage": "fr-FR",
+    "isAccessibleForFree": true,
+    "url": "https://tonargentexplique.fr/calcul-tva.html"
+  }
+  </script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="d0fa94fe-a108-4590-a465-8f0017569370"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="L'Argent Expliqué — Accueil calculateurs">
+        <span class="brand-name">💶 L'Argent Expliqué</span>
+        <span class="brand-sub">Calculateurs gratuits</span>
+      </a>
+      <a href="https://www.youtube.com/@tonargentexplique" class="header-cta" target="_blank" rel="noopener">
+        📺 La chaîne
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="container">
+
+      <nav class="breadcrumb" aria-label="Navigation">
+        <a href="index.html">Calculateurs</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Salaire &amp; impôts</span>
+        <span class="breadcrumb-sep">›</span>
+        <span>Calcul TVA</span>
+      </nav>
+
+      <!-- Calculator card -->
+      <div class="calc-card mt-sm">
+        <h1 class="calc-title">🧾 Calcul de TVA</h1>
+        <p class="calc-intro">
+          Entrez un montant HT <em>ou</em> TTC et obtenez immédiatement la conversion pour les trois taux de TVA en vigueur en France.
+          Utile pour les freelances, auto-entrepreneurs et particuliers qui vérifient leurs factures.
+        </p>
+
+        <!-- Direction toggle -->
+        <div style="display:flex; gap:10px; margin-bottom:16px;">
+          <button class="tva-btn active" id="btnHTtoTTC" type="button" aria-pressed="true">
+            HT → TTC
+          </button>
+          <button class="tva-btn" id="btnTTCtoHT" type="button" aria-pressed="false">
+            TTC → HT
+          </button>
+        </div>
+
+        <form id="calcForm" novalidate>
+          <div class="form-group">
+            <label for="montant" id="labelMontant">Montant HT<span class="required">*</span></label>
+            <div class="input-wrap">
+              <input type="number" id="montant" value="1000" min="0" step="0.01" inputmode="decimal" aria-describedby="montantErr" />
+              <span class="input-unit">€</span>
+            </div>
+            <span class="input-error" id="montantErr" role="alert"></span>
+          </div>
+        </form>
+
+        <!-- Results for 3 taux -->
+        <div id="resultGrid" style="display:flex; flex-direction:column; gap:12px; margin-top:20px;" aria-live="polite">
+
+          <!-- 20% -->
+          <div class="result-card" style="padding:16px 20px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+              <div>
+                <div class="result-label" style="text-align:left;">TVA 20 % — taux normal</div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">Biens &amp; services courants</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="result-main" id="res20" style="font-size:1.6rem;">—</div>
+                <div class="result-sub" id="res20tva" style="text-align:right;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10% -->
+          <div class="result-card" style="padding:16px 20px; border-color:var(--warn);">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+              <div>
+                <div class="result-label" style="text-align:left;">TVA 10 % — taux intermédiaire</div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">Restauration, transports, travaux…</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="result-main" style="font-size:1.6rem; color:var(--warn);" id="res10">—</div>
+                <div class="result-sub" id="res10tva" style="text-align:right;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5.5% -->
+          <div class="result-card" style="padding:16px 20px; border-color:#9FB4AB;">
+            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+              <div>
+                <div class="result-label" style="text-align:left;">TVA 5,5 % — taux réduit</div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">Alimentation, livres, énergie…</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="result-main" style="font-size:1.6rem; color:var(--text-muted);" id="res55">—</div>
+                <div class="result-sub" id="res55tva" style="text-align:right;"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Ad slot -->
+        <!-- AD_SLOT: rectangle 300x250 -->
+        <div class="ad-placeholder"></div>
+
+      </div><!-- /calc-card -->
+
+      <!-- How it works -->
+      <div class="how-it-works">
+        <div class="how-title">📐 Comment ça marche</div>
+        <p>
+          La TVA (Taxe sur la Valeur Ajoutée) est une taxe appliquée sur le prix de vente des biens et services.
+          Elle s'ajoute au prix hors taxe (HT) pour donner le prix toutes taxes comprises (TTC).
+        </p>
+        <div class="formula-block">
+          HT → TTC : TTC = HT × (1 + taux)<br>
+          TTC → HT : HT  = TTC / (1 + taux)<br>
+          Montant TVA = TTC − HT
+        </div>
+        <p>
+          Exemples vérifiés :
+        </p>
+        <ul style="font-size:0.85rem; color:var(--text-muted); padding-left:18px; line-height:1.8;">
+          <li>1 000 € HT à 20 % → TTC = 1 200 €, TVA = 200 €</li>
+          <li>1 000 € HT à 10 % → TTC = 1 100 €, TVA = 100 €</li>
+          <li>1 000 € HT à 5,5 % → TTC = 1 055 €, TVA = 55 €</li>
+          <li>1 200 € TTC à 20 % → HT = 1 000 €, TVA = 200 €</li>
+        </ul>
+      </div>
+
+      <!-- Email capture -->
+      <div class="email-capture mt-md">
+        <div class="email-capture-title">📥 Guide gratuit : les 5 erreurs qui coûtent cher en épargne</div>
+        <p class="email-capture-sub">
+          Laisse ton email : accès immédiat au guide + les nouveaux calculateurs et repères finances perso. Gratuit, sans spam.
+        </p>
+        <form class="email-form lae-email-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="d97a8c73-b827-48bb-b437-e053a73fdb7e">
+          <input type="hidden" name="subject" value="L'Argent Calculateurs — lead (calcul TVA)">
+          <input type="hidden" name="from_name" value="L'Argent Calculateurs">
+          <input type="checkbox" name="botcheck" style="display:none !important" tabindex="-1" autocomplete="off">
+          <input type="email" name="email" placeholder="ton@email.fr" autocomplete="email" required aria-label="Adresse email" />
+          <button type="submit">Recevoir le guide →</button>
+        </form>
+        <p class="email-note">📌 Pas de spam. Désinscription en 1 clic. Voir la <a href="confidentialite.html">politique de confidentialité</a>.</p>
+        <div class="lae-email-error" style="display:none;">Une erreur est survenue. Réessaie dans un instant.</div>
+        <div class="lae-email-success" style="display:none;">
+          ✔ Merci ! Tu es sur la liste.
+          <br><a class="lae-guide-link" href="guides/5-erreurs-epargne.html" target="_blank" rel="noopener">📖 Accéder au guide maintenant →</a>
+        </div>
+      </div>
+
+      <!-- CTA YouTube -->
+      <div class="mt-md">
+        <a href="https://www.youtube.com/@tonargentexplique" class="yt-cta" target="_blank" rel="noopener">
+          <span class="yt-cta-icon">📺</span>
+          <span>La TVA expliquée simplement en vidéo →</span>
+          <span class="yt-cta-arrow">›</span>
+        </a>
+      </div>
+
+      <!-- SEO text -->
+      <div class="how-it-works mt-md">
+        <div class="how-title">💡 Les 3 taux de TVA en France</div>
+        <p>
+          La France applique trois taux principaux de TVA :
+        </p>
+        <ul style="font-size:0.85rem; color:var(--text-muted); padding-left:18px; line-height:2; margin-bottom:8px;">
+          <li><strong style="color:var(--text);">20 % (taux normal)</strong> — la majorité des biens et services : électronique, vêtements, voitures, services professionnels.</li>
+          <li><strong style="color:var(--text);">10 % (taux intermédiaire)</strong> — restauration, transport de voyageurs, travaux de rénovation, médicaments non remboursés.</li>
+          <li><strong style="color:var(--text);">5,5 % (taux réduit)</strong> — produits alimentaires, livres, abonnements gaz/électricité, travaux de rénovation énergétique.</li>
+        </ul>
+        <p>
+          Il existe aussi un taux super-réduit de 2,1 % (médicaments remboursables, presse). Ce calculateur couvre les 3 taux courants.
+        </p>
+        <p>
+          Ce calculateur est fourni à titre <strong style="color:var(--text)">éducatif et informatif</strong>. Vérifiez toujours le taux applicable
+          avec un comptable ou auprès des services fiscaux (impots.gouv.fr) pour votre situation spécifique.
+        </p>
+      </div>
+
+      <!-- Related -->
+      <div class="related-links mt-md">
+        <div class="related-title">Calculateurs liés</div>
+        <ul class="related-list" aria-label="Calculateurs liés aux finances">
+          <li><a href="salaire-brut-net.html">Salaire brut ↔ net France</a></li>
+          <li><a href="rendement-locatif.html">Rendement locatif</a></li>
+          <li><a href="mensualite-pret.html">Mensualité de prêt</a></li>
+          <li><a href="interets-composes.html">Intérêts composés</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-yt">
+        <a href="https://www.youtube.com/@tonargentexplique" target="_blank" rel="noopener">
+          📺 L'Argent Expliqué — La chaîne YouTube
+        </a>
+      </div>
+      <p class="footer-disclaimer">
+        <strong>⚠️ Contenu éducatif uniquement.</strong> Les taux de TVA peuvent évoluer. Vérifiez toujours auprès de votre comptable ou des services fiscaux (impots.gouv.fr) pour votre situation spécifique.
+      </p>
+      <div class="footer-links">
+        <a href="index.html">Accueil</a>
+        <a href="salaire-brut-net.html">Salaire net</a>
+        <a href="rendement-locatif.html">Rendement locatif</a>
+        <a href="credit-immobilier.html">Crédit immo</a>
+        <a href="interets-composes.html">Intérêts composés</a>
+      </div>
+      <p class="footer-copy">
+        <a href="confidentialite.html" style="color:var(--text-muted);text-decoration:underline;">Politique de confidentialité</a>
+        &nbsp;·&nbsp; © 2026 L'Argent Expliqué — Tous droits réservés
+      </p>
+    </div>
+  </footer>
+
+  <style>
+    .tva-btn {
+      flex: 1;
+      background: var(--bg-input);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-family: var(--font);
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      min-height: 44px;
+    }
+    .tva-btn.active {
+      background: rgba(31,224,138,0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+  </style>
+
+  <script src="assets/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const elMontant = document.getElementById("montant");
+      const labelMontant = document.getElementById("labelMontant");
+      const btnHTtoTTC = document.getElementById("btnHTtoTTC");
+      const btnTTCtoHT = document.getElementById("btnTTCtoHT");
+
+      const TAUX = [
+        { id: "20", taux: 0.20, res: document.getElementById("res20"), resTva: document.getElementById("res20tva") },
+        { id: "10", taux: 0.10, res: document.getElementById("res10"), resTva: document.getElementById("res10tva") },
+        { id: "55", taux: 0.055, res: document.getElementById("res55"), resTva: document.getElementById("res55tva") },
+      ];
+
+      let modeHTtoTTC = true;
+
+      function setMode(htToTtc) {
+        modeHTtoTTC = htToTtc;
+        btnHTtoTTC.classList.toggle("active", htToTtc);
+        btnHTtoTTC.setAttribute("aria-pressed", htToTtc ? "true" : "false");
+        btnTTCtoHT.classList.toggle("active", !htToTtc);
+        btnTTCtoHT.setAttribute("aria-pressed", !htToTtc ? "true" : "false");
+        labelMontant.innerHTML = htToTtc
+          ? 'Montant HT<span class="required">*</span>'
+          : 'Montant TTC<span class="required">*</span>';
+        compute();
+      }
+
+      btnHTtoTTC.addEventListener("click", () => setMode(true));
+      btnTTCtoHT.addEventListener("click", () => setMode(false));
+
+      function compute() {
+        const M = parseVal(elMontant.value);
+
+        const vM = validate(M, "montant", { min: 0, allowZero: true });
+        if (!vM.ok) { showError(elMontant, vM.error); return; }
+        showError(elMontant, "");
+
+        // Formules vérifiées:
+        // HT=1000, 20% → TTC=1200, TVA=200
+        // TTC=1200, 20% → HT=1000, TVA=200
+        TAUX.forEach(({ taux, res, resTva }) => {
+          let result, tvaAmount;
+          if (modeHTtoTTC) {
+            result    = M * (1 + taux);
+            tvaAmount = result - M;
+            res.textContent    = fmtEur(result) + " TTC";
+            resTva.textContent = "dont TVA = " + fmtEur(tvaAmount);
+          } else {
+            result    = M / (1 + taux);
+            tvaAmount = M - result;
+            res.textContent    = fmtEur(result) + " HT";
+            resTva.textContent = "dont TVA = " + fmtEur(tvaAmount);
+          }
+        });
+      }
+
+      elMontant.addEventListener("input", compute);
+      elMontant.addEventListener("change", compute);
+
+      compute();
+    })();
+  </script>
+</body>
+</html>

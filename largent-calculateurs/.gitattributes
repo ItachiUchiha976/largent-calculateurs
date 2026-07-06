@@ -1,0 +1,10 @@
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+
+# Volet 2 — pack-budget (zip + xlsx du produit reel)
+pack-budget/**/*.zip binary
+pack-budget/**/*.xlsx binary
+pack-budget/**/*.pdf binary
+pack-budget/**/*.png binary
