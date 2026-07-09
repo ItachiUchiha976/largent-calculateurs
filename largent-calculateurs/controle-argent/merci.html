@@ -41,9 +41,7 @@ h1 { font-size:1.6rem; font-weight:900; margin-bottom:0.7rem; color:var(--white)
     <h1>Merci pour ta commande !</h1>
     <p class="sub">Ton paiement est confirmé. Ton guide « Reprends le Contrôle de ton Argent » est prêt — télécharge-le maintenant :</p>
 
-    <a class="btn-dl" href="dl/6dee7c85bff4d0be/Reprends_le_Controle_de_ton_Argent_2026.pdf" download="Reprends-le-Controle-de-ton-Argent-2026.pdf">
-      ⬇️ Télécharger mon guide (PDF)
-    </a>
+    <a class="btn-dl" id="downloadBtn" href="#" style="pointer-events:none;opacity:0.7;">⏳ Préparation du téléchargement...</a>
     <p class="dl-note">30 pages · format PDF · lisible sur mobile, tablette et ordinateur</p>
 
     <div class="mail-box">
@@ -60,5 +58,21 @@ h1 { font-size:1.6rem; font-weight:900; margin-bottom:0.7rem; color:var(--white)
   setTimeout(function(){ try { if (window.umami) umami.track('controle_argent_purchase_confirmed', { produit:'controle-argent-2026', prix:9.00 }); } catch(e){} }, 1500);
 </script>
 <script src="bos-ambiance.js"></script>
+<script>
+// BOS 09/07/2026 — téléchargement sécurisé par token (anti-vol PDF)
+var TOKEN_API = 'https://secretariat-retailers-bases-mandatory.trycloudflare.com/download/';
+var token = new URLSearchParams(location.search).get('token');
+var btn = document.getElementById('downloadBtn');
+if (token) {
+  btn.href = TOKEN_API + encodeURIComponent(token);
+  btn.textContent = '⬇️ Télécharger mon guide (' + ext + ')';
+  btn.style.pointerEvents = 'auto';
+  btn.style.opacity = '1';
+} else {
+  btn.textContent = '⚠️ Téléchargement indisponible';
+  btn.style.opacity = '0.5';
+  btn.href = '#';
+}
+</script>
 </body>
 </html>

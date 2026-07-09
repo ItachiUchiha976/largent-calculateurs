@@ -41,9 +41,7 @@ h1 { font-size:1.6rem; font-weight:900; margin-bottom:0.7rem; color:var(--white)
     <h1>Merci pour ta commande !</h1>
     <p class="sub">Ton paiement est confirmé. Ton « Pack Maître du Budget 2026 » (5 tableurs + guide PDF) est prêt — télécharge-le maintenant :</p>
 
-    <a class="btn-dl" href="dl/02cbe0d2189e7eea/Pack_Maitre_du_Budget_2026.zip" download="Pack-Maitre-du-Budget-2026.zip">
-      ⬇️ Télécharger mon pack (.zip)
-    </a>
+    <a class="btn-dl" id="downloadBtn" href="#" style="pointer-events:none;opacity:0.7;">⏳ Préparation du téléchargement...</a>
     <p class="dl-note">5 fichiers .xlsx + 1 PDF · dans une seule archive .zip</p>
 
     <div class="mail-box">
@@ -60,5 +58,21 @@ h1 { font-size:1.6rem; font-weight:900; margin-bottom:0.7rem; color:var(--white)
   setTimeout(function(){ try { if (window.umami) umami.track('pack_budget_purchase_confirmed', { produit:'pack-maitre-budget-2026', prix:12.00 }); } catch(e){} }, 1500);
 </script>
 <script src="bos-ambiance.js"></script>
+<script>
+// BOS 09/07/2026 — téléchargement sécurisé par token (anti-vol ZIP)
+var TOKEN_API = 'https://secretariat-retailers-bases-mandatory.trycloudflare.com/download/';
+var token = new URLSearchParams(location.search).get('token');
+var btn = document.getElementById('downloadBtn');
+if (token) {
+  btn.href = TOKEN_API + encodeURIComponent(token);
+  btn.textContent = '⬇️ Télécharger le pack (' + ext + ')';
+  btn.style.pointerEvents = 'auto';
+  btn.style.opacity = '1';
+} else {
+  btn.textContent = '⚠️ Téléchargement indisponible';
+  btn.style.opacity = '0.5';
+  btn.href = '#';
+}
+</script>
 </body>
 </html>
