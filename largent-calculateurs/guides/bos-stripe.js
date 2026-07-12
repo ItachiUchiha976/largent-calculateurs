@@ -1,7 +1,7 @@
 /* BOS — Checkout Stripe (produits digitaux). Restauré le 12/07/2026.
    Le bouton crée une session Checkout via l'API VPS (stripe-api) qui génère
    le token de téléchargement (livraison de l'ebook) injecté dans success_url.
-   Encaisse vers le compte Stripe soulefred@hotmail.fr. */
+   Encaisse vers le compte Stripe de la boutique. */
 
 (function(){
   'use strict';
