@@ -6,7 +6,7 @@
 (function(){
   'use strict';
 
-  var STRIPE_API = 'https://secretariat-retailers-bases-mandatory.trycloudflare.com/create-checkout-session';
+  var STRIPE_API = 'https://api.tonargentexplique.fr/create-checkout-session';
 
   // Produits digitaux de ce site (prix TTC = prix affichés sur les pages)
   var DIGITAL = {
