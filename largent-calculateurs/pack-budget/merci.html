@@ -63,7 +63,7 @@ var token = new URLSearchParams(location.search).get('token');
 var btn = document.getElementById('downloadBtn');
 if (token) {
   btn.href = TOKEN_API + encodeURIComponent(token);
-  btn.textContent = '⬇️ Télécharger le pack (' + ext + ')';
+  btn.textContent = '⬇️ Télécharger le pack (ZIP)';
   btn.style.pointerEvents = 'auto';
   btn.style.opacity = '1';
 } else {
