@@ -52,6 +52,10 @@ nav { background: var(--bg-card); border-bottom: 1px solid var(--border); paddin
 .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 8px; flex-wrap: wrap; }
 .logo { font-size: 1.15rem; font-weight: 900; color: var(--text); text-decoration: none; letter-spacing: -0.3px; }
 .logo span { color: var(--accent); }
+.nav-home { border: 1.5px solid var(--accent); color: var(--accent); padding: 0.45rem 1rem; border-radius: 8px; font-weight: 700; font-size: 0.88rem; text-decoration: none; transition: background .18s, color .18s; }
+.nav-home:hover { background: var(--accent); color: var(--bg-deep); }
+.hero-crosslink { margin: 0.9rem 0 0; padding: 0.7rem 1rem; background: rgba(255,255,255,.06); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; font-size: 0.92rem; line-height: 1.5; }
+.hero-crosslink a { color: var(--accent); font-weight: 700; }
 .nav-cta { background: var(--accent); color: var(--bg-deep); padding: 0.5rem 1.1rem; border-radius: 8px; font-weight: 800; font-size: 0.88rem; text-decoration: none; }
 
 /* HERO */
@@ -160,6 +164,7 @@ footer { background: var(--bg-card); color: var(--text-muted); padding: 2.5rem 1
 <nav>
   <div class="nav-inner">
     <a href="../" class="logo">💶 L'Argent <span>Expliqué</span></a>
+    <a href="../" class="nav-home">🏠 Accueil</a>
     <a href="#acheter" class="nav-cta">Obtenir le guide — 9 €</a>
   </div>
 </nav>
@@ -179,6 +184,7 @@ footer { background: var(--bg-card); color: var(--text-muted); padding: 2.5rem 1
         <li>Commencer à investir en ETF dès 50 €/mois</li>
         <li>Un plan d'action concret sur 90 jours, semaine par semaine</li>
       </ul>
+      <p class="hero-crosslink">📖 <strong>Ce guide = la méthode, expliquée</strong> — le seul des deux avec tout le volet investissement (PEA, ETF, assurance-vie) et le plan 90 jours. Tu préfères des fichiers Excel prêts à remplir ? → <a href="../pack-budget/">le Pack Maître du Budget</a>. Les deux se complètent : le guide explique, le pack applique.</p>
       <div id="acheter" class="price-row">
         <span class="price">9 €</span>
         <span class="price-note">PDF · 30 pages · téléchargement immédiat</span>

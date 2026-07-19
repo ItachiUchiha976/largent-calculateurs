@@ -52,6 +52,10 @@ nav { background: var(--bg-card); border-bottom: 1px solid var(--border); paddin
 .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 8px; flex-wrap: wrap; }
 .logo { font-size: 1.15rem; font-weight: 900; color: var(--text); text-decoration: none; letter-spacing: -0.3px; }
 .logo span { color: var(--accent); }
+.nav-home { border: 1.5px solid var(--accent); color: var(--accent); padding: 0.45rem 1rem; border-radius: 8px; font-weight: 700; font-size: 0.88rem; text-decoration: none; transition: background .18s, color .18s; }
+.nav-home:hover { background: var(--accent); color: var(--bg-deep); }
+.hero-crosslink { margin: 0.9rem 0 0; padding: 0.7rem 1rem; background: rgba(255,255,255,.06); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; font-size: 0.92rem; line-height: 1.5; }
+.hero-crosslink a { color: var(--accent); font-weight: 700; }
 .nav-cta { background: var(--accent); color: var(--bg-deep); padding: 0.5rem 1.1rem; border-radius: 8px; font-weight: 800; font-size: 0.88rem; text-decoration: none; }
 
 /* HERO */
@@ -175,6 +179,7 @@ footer { background: var(--bg-card); color: var(--text-muted); padding: 2.5rem 1
 <nav>
   <div class="nav-inner">
     <a href="../" class="logo">💶 L'Argent <span>Expliqué</span></a>
+    <a href="../" class="nav-home">🏠 Accueil</a>
     <a href="#acheter" class="nav-cta">Obtenir le pack — 12 €</a>
   </div>
 </nav>
@@ -194,6 +199,7 @@ footer { background: var(--bg-card); color: var(--text-muted); padding: 2.5rem 1
         <li>Suivi de patrimoine net trimestriel</li>
         <li>Guide PDF 15 pages pour utiliser chaque tableur pas à pas</li>
       </ul>
+      <p class="hero-crosslink">🧰 <strong>Ce pack = les outils, prêts à remplir</strong> — 5 tableurs avec formules déjà en place (introuvables sur Amazon), dont le suivi de patrimoine net qu'on ne trouve nulle part ailleurs chez nous. Tu veux d'abord comprendre la méthode et le volet investissement ? → <a href="../controle-argent/">le guide Reprends le Contrôle de ton Argent</a>. Les deux se complètent : le guide explique, le pack applique.</p>
       <div id="acheter" class="price-row">
         <span class="price">12 €</span>
         <span class="price-note">.zip · 5 fichiers Excel + 1 PDF · téléchargement immédiat</span>
