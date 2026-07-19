@@ -208,6 +208,46 @@ footer { background: var(--bg-card); color: var(--text-muted); padding: 2.5rem 1
         Obtenir le pack — 12 €
       </button>
       <div class="pay-reassure">🔒 Paiement sécurisé PayPal ou carte bancaire · aucun compte requis</div>
+      <style>
+        .bundle-offer { margin: 1.1rem 0 0; padding: 1rem 1.2rem; background: rgba(255,255,255,.05); border: 1.5px solid var(--accent); border-radius: 12px; }
+        .bundle-tag { display: inline-block; background: var(--accent); color: var(--bg-deep); font-weight: 800; font-size: .78rem; padding: 3px 10px; border-radius: 999px; margin-bottom: .5rem; letter-spacing: .3px; }
+        .bundle-offer p { margin: 0 0 .7rem; line-height: 1.5; font-size: .95rem; }
+        .bundle-price { font-size: 1.35rem; font-weight: 900; color: var(--accent); }
+        .bundle-instead { font-size: .88rem; opacity: .85; }
+        .bundle-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+        .bundle-btns button { flex: 1 1 200px; padding: 11px 14px; border: none; border-radius: 8px; font-weight: 800; font-size: .95rem; cursor: pointer; }
+        .bundle-paypal { background: var(--accent); color: var(--bg-deep); }
+        .bundle-cb { background: #635BFF; color: #fff; }
+      </style>
+      <div class="bundle-offer">
+        <span class="bundle-tag">🎁 OFFRE COMBINÉE</span>
+        <p><strong>Le Pack Complet Argent = le guide (30 p.) + les 5 tableurs Excel + leur mode d'emploi</strong> — la méthode ET les outils, en un seul téléchargement.<br>
+        <span class="bundle-price">16,90 €</span> <span class="bundle-instead">au lieu de 21 € en les achetant séparément (9 € + 12 €)</span></p>
+        <div class="bundle-btns">
+          <button type="button" class="bundle-paypal" onclick="bosBuyBundle()" data-umami-event="bundle-paypal">🎁 Obtenir le Pack Complet — 16,90 €</button>
+          <button type="button" class="bundle-cb" onclick="bosBuyBundleCB(this)" data-umami-event="bundle-cb">💳 Payer par CB</button>
+        </div>
+      </div>
+      <script>
+      function bosBuyBundle(){
+        var go = function(){ bosBuyNow('Pack Complet Argent 2026 (Guide + Tableurs)', 16.90, 'pack-complet-argent'); };
+        try {
+          fetch('https://api.tonargentexplique.fr/generate-token', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({product:'pack-complet-argent'}) })
+            .then(function(r){ return r.json(); })
+            .then(function(d){ window._bosEagerToken = (d && d.token) ? d.token : null; go(); })
+            .catch(function(){ window._bosEagerToken = null; go(); });
+        } catch(e){ window._bosEagerToken = null; go(); }
+      }
+      function bosBuyBundleCB(btn){
+        btn.disabled = true; btn.textContent = '⏳ Redirection vers le paiement…';
+        fetch('https://api.tonargentexplique.fr/create-checkout-session', { method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ amount: 16.90, currency: 'eur', boutique: "L'Argent Expliqué", products: ['pack-complet-argent'],
+            returnPath: location.pathname.replace(/[^\/]*$/, 'merci.html'), cancelPath: location.pathname }) })
+          .then(function(r){ return r.json(); })
+          .then(function(d){ if (d.url) { location.href = d.url; } else { alert('Erreur de paiement : ' + (d.error || 'inconnue') + '. Tu peux payer via PayPal juste au-dessus.'); btn.disabled = false; btn.textContent = '💳 Payer par CB'; } })
+          .catch(function(){ alert('Erreur réseau — tu peux payer via PayPal juste au-dessus.'); btn.disabled = false; btn.textContent = '💳 Payer par CB'; });
+      }
+      </script>
     </div>
     <div class="hero-cover">
       <div class="cover-frame">
