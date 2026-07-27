@@ -156,6 +156,15 @@ footer { background: var(--bg-card); color: var(--text-muted); padding: 2.5rem 1
   .hero-cover { order: -1; max-width: 320px; margin: 0 auto; }
   .btn-buy { max-width: 100%; }
 }
+/* BOS 27/07/2026 - en-tete mobile : .nav-inner avait une hauteur FIXE de 60px combinee a
+   flex-wrap:wrap. A 390px les 3 elements ne tiennent pas sur une ligne : le CTA vert passait
+   a la ligne mais la barre ne grandissait pas => il debordait du header et chevauchait sa
+   bordure basse. min-height laisse la barre grandir quand ca passe a la ligne. */
+@media (max-width: 560px) {
+  .nav-inner { height: auto; min-height: 60px; padding: 8px 0; row-gap: 8px; justify-content: center; }
+  .logo { font-size: 1.05rem; }
+  .nav-home, .nav-cta { font-size: 0.82rem; padding: 0.42rem 0.8rem; }
+}
 </style>
 </head>
 <body>
@@ -377,6 +386,7 @@ footer { background: var(--bg-card); color: var(--text-muted); padding: 2.5rem 1
         <a href="../">Calculateurs gratuits</a>
         <a href="https://www.youtube.com/@tonargentexplique" target="_blank" rel="noopener">Chaîne YouTube</a>
         <a href="mailto:contact@tonargentexplique.fr">Contact</a>
+        <a href="../cgv.html">CGV &amp; Mentions légales</a>
         <a href="../confidentialite.html">Confidentialité</a>
       </div>
     </div>
