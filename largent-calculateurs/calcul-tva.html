@@ -26,6 +26,46 @@
     "url": "https://tonargentexplique.fr/calcul-tva.html"
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Comment calculer la TVA à partir d'un montant HT ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "TTC = HT × (1 + taux de TVA). Exemple : 1 000 € HT à 20 % → 1 200 € TTC, dont 200 € de TVA. Le calculateur affiche les trois taux courants (20 %, 10 %, 5,5 %) simultanément pour un même montant."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment retrouver le montant HT à partir d'un prix TTC ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HT = TTC / (1 + taux de TVA). Exemple : 1 200 € TTC à 20 % → 1 000 € HT. Le montant de TVA est la différence entre le TTC et le HT, soit 200 €."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quels sont les taux de TVA en France ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "La France applique trois taux courants : 20 % (taux normal, majorité des biens et services), 10 % (taux intermédiaire : restauration, transports, travaux) et 5,5 % (taux réduit : alimentation, livres, énergie). Il existe aussi un taux super-réduit de 2,1 %."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quel taux de TVA appliquer pour un freelance ou un auto-entrepreneur ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cela dépend de la nature de la prestation : la plupart des services professionnels sont soumis au taux normal de 20 %. Vérifiez le taux applicable à votre activité sur impots.gouv.fr ou auprès d'un comptable — le calculateur gère la conversion HT/TTC mais ne détermine pas le taux à appliquer."
+        }
+      }
+    ]
+  }
+  </script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="d0fa94fe-a108-4590-a465-8f0017569370"></script>
 <link rel="stylesheet" href="../bos-wow.css?v=2">
 </head>
@@ -217,6 +257,37 @@
           Ce calculateur est fourni à titre <strong style="color:var(--text)">éducatif et informatif</strong>. Vérifiez toujours le taux applicable
           avec un comptable ou auprès des services fiscaux (impots.gouv.fr) pour votre situation spécifique.
         </p>
+      </div>
+
+      <!-- FAQ -->
+      <div class="how-it-works mt-md">
+        <div class="how-title">❓ Questions fréquentes</div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Comment calculer la TVA à partir d'un montant HT ?</summary>
+            <div class="faq-answer">
+              <p>TTC = HT × (1 + taux de TVA). Exemple : 1 000 € HT à 20 % → 1 200 € TTC, dont 200 € de TVA. Le calculateur affiche les trois taux courants (20 %, 10 %, 5,5 %) simultanément pour un même montant.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Comment retrouver le montant HT à partir d'un prix TTC ?</summary>
+            <div class="faq-answer">
+              <p>HT = TTC / (1 + taux de TVA). Exemple : 1 200 € TTC à 20 % → 1 000 € HT. Le montant de TVA est la différence entre le TTC et le HT, soit 200 €.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Quels sont les taux de TVA en France ?</summary>
+            <div class="faq-answer">
+              <p>La France applique trois taux courants : 20 % (taux normal, majorité des biens et services), 10 % (taux intermédiaire : restauration, transports, travaux) et 5,5 % (taux réduit : alimentation, livres, énergie). Il existe aussi un taux super-réduit de 2,1 %.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Quel taux de TVA appliquer pour un freelance ou un auto-entrepreneur ?</summary>
+            <div class="faq-answer">
+              <p>Cela dépend de la nature de la prestation : la plupart des services professionnels sont soumis au taux normal de 20 %. Vérifiez le taux applicable à votre activité sur impots.gouv.fr ou auprès d'un comptable — le calculateur gère la conversion HT/TTC mais ne détermine pas le taux à appliquer.</p>
+            </div>
+          </details>
+        </div>
       </div>
 
       <!-- Related -->

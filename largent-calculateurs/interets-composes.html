@@ -25,6 +25,46 @@
     "isAccessibleForFree": true
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Comment fonctionnent les intérêts composés ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Vos intérêts produisent eux-mêmes des intérêts à chaque période, ce qui crée une croissance exponentielle. Exemple : 1 000 € placés à 5 % par an pendant 30 ans deviennent environ 4 322 € sans aucun versement supplémentaire."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quelle différence entre intérêts simples et intérêts composés ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Les intérêts simples ne portent que sur le capital initial. Les intérêts composés portent aussi sur les intérêts déjà générés. Sur le long terme, la différence est considérable : c'est l'effet boule de neige de l'épargne."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment calculer la valeur future d'un capital avec des versements mensuels ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Le calculateur applique la capitalisation mensuelle : FV = C×(1+i)^(n×12) + V×[((1+i)^(n×12)−1)/i], avec i le taux mensuel équivalent. Il affiche aussi le total versé et les intérêts gagnés pour chaque scénario."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Pourquoi commencer à épargner tôt est-il si important ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Parce que l'effet des intérêts composés explose avec le temps. Épargner 100 € par mois pendant 30 ans à 5 % donne un capital bien supérieur à épargner 200 € par mois pendant 15 ans : le temps fait la majeure partie du travail."
+        }
+      }
+    ]
+  }
+  </script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="d0fa94fe-a108-4590-a465-8f0017569370"></script>
 <link rel="stylesheet" href="../bos-wow.css?v=2">
 </head>
@@ -222,11 +262,43 @@
         </a>
       </div>
 
+      <!-- FAQ -->
+      <div class="how-it-works mt-md">
+        <div class="how-title">❓ Questions fréquentes</div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Comment fonctionnent les intérêts composés ?</summary>
+            <div class="faq-answer">
+              <p>Vos intérêts produisent eux-mêmes des intérêts à chaque période, ce qui crée une croissance exponentielle. Exemple : 1 000 € placés à 5 % par an pendant 30 ans deviennent environ 4 322 € sans aucun versement supplémentaire.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Quelle différence entre intérêts simples et intérêts composés ?</summary>
+            <div class="faq-answer">
+              <p>Les intérêts simples ne portent que sur le capital initial. Les intérêts composés portent aussi sur les intérêts déjà générés. Sur le long terme, la différence est considérable : c'est l'effet boule de neige de l'épargne.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Comment calculer la valeur future d'un capital avec des versements mensuels ?</summary>
+            <div class="faq-answer">
+              <p>Le calculateur applique la capitalisation mensuelle : FV = C×(1+i)^(n×12) + V×[((1+i)^(n×12)−1)/i], avec i le taux mensuel équivalent. Il affiche aussi le total versé et les intérêts gagnés pour chaque scénario.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Pourquoi commencer à épargner tôt est-il si important ?</summary>
+            <div class="faq-answer">
+              <p>Parce que l'effet des intérêts composés explose avec le temps. Épargner 100 € par mois pendant 30 ans à 5 % donne un capital bien supérieur à épargner 200 € par mois pendant 15 ans : le temps fait la majeure partie du travail.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+
       <!-- Related -->
       <div class="related-links mt-md">
         <div class="related-title">Autres calculateurs</div>
         <ul class="related-list" aria-label="Liens vers d'autres calculateurs">
           <li><a href="epargne-mensuelle.html">Épargne mensuelle — quel capital atteindre ?</a></li>
+          <li><a href="objectif-epargne.html">Objectif épargne — combien mettre de côté ?</a></li>
           <li><a href="regle-72.html">Règle des 72 — combien de temps pour doubler ?</a></li>
           <li><a href="inflation-pouvoir-achat.html">Inflation — érosion du pouvoir d'achat</a></li>
           <li><a href="livret-a-vs-inflation.html">Livret A vs Inflation — rendement réel</a></li>

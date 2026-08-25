@@ -25,6 +25,46 @@
     "isAccessibleForFree": true
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Combien aurai-je en épargnant 200 € par mois pendant 20 ans ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "À 5 % par an (capitalisation mensuelle), vous obtenez environ 81 000 €, dont environ 33 000 € d'intérêts pour 48 000 € versés. Le calculateur affiche la part des intérêts par rapport à vos versements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Comment fonctionne l'épargne programmée avec intérêts composés ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Chaque versement mensuel est capitalisé depuis son dépôt jusqu'à la fin de la période : les intérêts portent sur les versements précédents. Plus l'horizon est long, plus la part des intérêts dans le capital final est grande."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quel taux utiliser pour simuler mon épargne mensuelle ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Un taux prudent et réaliste : environ 3 % pour un Livret A, 2 à 3 % pour un fonds euros en assurance-vie, environ 7 % en moyenne historique pour un ETF monde (volatile à court terme). Un taux trop optimiste surévalue le capital futur."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Quelle est la différence entre épargner 100 € et 200 € par mois ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Doubler le versement double votre apport total, mais l'effet des intérêts composés amplifie l'écart sur longue durée : les intérêts gagnés sur 200 €/mois représentent plus du double de ceux gagnés sur 100 €/mois à horizon égal."
+        }
+      }
+    ]
+  }
+  </script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="d0fa94fe-a108-4590-a465-8f0017569370"></script>
 <link rel="stylesheet" href="../bos-wow.css?v=2">
 </head>
@@ -218,10 +258,42 @@
         </a>
       </div>
 
+      <!-- FAQ -->
+      <div class="how-it-works mt-md">
+        <div class="how-title">❓ Questions fréquentes</div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Combien aurai-je en épargnant 200 € par mois pendant 20 ans ?</summary>
+            <div class="faq-answer">
+              <p>À 5 % par an (capitalisation mensuelle), vous obtenez environ 81 000 €, dont environ 33 000 € d'intérêts pour 48 000 € versés. Le calculateur affiche la part des intérêts par rapport à vos versements.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Comment fonctionne l'épargne programmée avec intérêts composés ?</summary>
+            <div class="faq-answer">
+              <p>Chaque versement mensuel est capitalisé depuis son dépôt jusqu'à la fin de la période : les intérêts portent sur les versements précédents. Plus l'horizon est long, plus la part des intérêts dans le capital final est grande.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Quel taux utiliser pour simuler mon épargne mensuelle ?</summary>
+            <div class="faq-answer">
+              <p>Un taux prudent et réaliste : environ 3 % pour un Livret A, 2 à 3 % pour un fonds euros en assurance-vie, environ 7 % en moyenne historique pour un ETF monde (volatile à court terme). Un taux trop optimiste surévalue le capital futur.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>Quelle est la différence entre épargner 100 € et 200 € par mois ?</summary>
+            <div class="faq-answer">
+              <p>Doubler le versement double votre apport total, mais l'effet des intérêts composés amplifie l'écart sur longue durée : les intérêts gagnés sur 200 €/mois représentent plus du double de ceux gagnés sur 100 €/mois à horizon égal.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+
       <!-- Related -->
       <div class="related-links mt-md">
         <div class="related-title">Autres calculateurs</div>
         <ul class="related-list" aria-label="Liens vers d'autres calculateurs">
+          <li><a href="objectif-epargne.html">Objectif épargne — combien mettre de côté ?</a></li>
           <li><a href="interets-composes.html">Intérêts composés — avec capital initial</a></li>
           <li><a href="regle-72.html">Règle des 72 — combien de temps pour doubler ?</a></li>
           <li><a href="inflation-pouvoir-achat.html">Inflation — érosion du pouvoir d'achat</a></li>
